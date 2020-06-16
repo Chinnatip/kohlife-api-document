@@ -1,0 +1,1514 @@
+openapi: 3.0.0
+info:
+  title: KOHLIFE API
+  description: This is kohlife API
+  version: 1.0.0
+servers:
+- url: https://an0w7gywf8.execute-api.ap-southeast-1.amazonaws.com/prod
+  description: Production server (uses live data)
+- url: https://1iu056b482.execute-api.ap-southeast-1.amazonaws.com/dev
+  description: Sandbox server (uses test data)
+paths:
+  /auth/login:
+    post:
+      summary: Login Request
+      description: Login new request
+      operationId: login
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginUserResponse'
+      x-swagger-router-controller: Default
+  /stations:
+    get:
+      summary: Valid Station request
+      description: Valid Station request
+      operationId: getStation
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StationResponse'
+      x-swagger-router-controller: Default
+  /offer/{from}/{to}/{date}/{amount}:
+    get:
+      summary: Offer Request
+      description: Offer new request
+      operationId: getOffer
+      parameters:
+      - name: from
+        in: path
+        description: from station
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: phuket
+      - name: to
+        in: path
+        description: to station
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: koh-phi-phi
+      - name: date
+        in: path
+        description: departure date format in YYYY-MM-DD
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: '[1-9]{4}-[0-9]{2}-[0-9]{2}'
+          type: string
+          example: 2020-06-09
+      - name: amount
+        in: path
+        description: pax amount of passenger
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 20
+          minimum: 1
+          type: number
+          example: 2
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponse'
+      x-swagger-router-controller: Default
+  /offer-check/{schedule_id}:
+    get:
+      summary: Check offer Request
+      description: Check offer request
+      operationId: checkOffer
+      parameters:
+      - name: schedule_id
+        in: path
+        description: schedule_id that have to check available
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 12345678
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckOfferResponse'
+      x-swagger-router-controller: Default
+  /merchant:
+    get:
+      summary: Merchant get
+      description: Merchant get request
+      operationId: getMerchant
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      x-swagger-router-controller: Default
+    put:
+      summary: Merchant Request
+      description: Merchant topup request
+      operationId: topupMerchant
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantTopupRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      x-swagger-router-controller: Default
+    post:
+      summary: Merchant Request
+      description: Merchant new request
+      operationId: createMerchant
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantCreateRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      x-swagger-router-controller: Default
+  /booking/create:
+    post:
+      summary: Booking Request
+      description: Booking new request
+      operationId: creatBooking
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingCreateRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingResponse'
+      x-swagger-router-controller: Default
+  /booking/{ticket_reference_id}:
+    get:
+      summary: Ticket get
+      description: Ticket get request
+      operationId: getBooking
+      parameters:
+      - name: ticket_reference_id
+        in: path
+        description: ticket reference id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+      x-swagger-router-controller: Default
+  /bookings:
+    get:
+      summary: Ticket all get
+      description: Ticket all get request
+      operationId: getAllBooking
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllBookingResponse'
+      x-swagger-router-controller: Default
+  /cancellations/check/{ticket_reference_id}:
+    get:
+      summary: Cancellation check
+      description: Cancellation check request
+      operationId: getCancelCondition
+      parameters:
+      - name: ticket_reference_id
+        in: path
+        description: ticket reference id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancellationResponse'
+      x-swagger-router-controller: Default
+  /cancellations/create:
+    post:
+      summary: Cancellation create
+      description: Cancellation create request
+      operationId: postCancellation
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Content Type header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      - name: Authorization
+        in: header
+        description: Auth Header please get from Login response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Bearer AUTHORIZATION_CODE ....
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancellationCreateRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancellationResponse'
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    LoginUserRequest:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          maxLength: 48
+          minLength: 3
+          type: string
+          format: email
+        password:
+          maxLength: 48
+          minLength: 3
+          type: string
+    LoginUserResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/LoginUserResponse_message'
+      example:
+        message:
+          access_token: access_token
+        status:
+          status: true
+    StationResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: number
+      example:
+        message:
+          key:
+          - 0.80082819046101150206595775671303272247314453125
+          - 0.80082819046101150206595775671303272247314453125
+        status:
+          status: true
+    OfferResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferResponse_message'
+      example:
+        message:
+        - net_price_per_person: 6.02745618307040320615897144307382404804229736328125
+          datetime:
+            duration: duration
+            departure:
+              date: date
+              unit: 5.63737665663332876420099637471139430999755859375
+              time: time
+          trip:
+            from:
+              coordinate: coordinate
+              location: location
+              terminal: terminal
+              location_key: location_key
+          total_price: 5.962133916683182377482808078639209270477294921875
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
+          currency: currency
+          service_provider:
+            name: name
+            logo: logo
+            fullname: fullname
+          schedule_id: 0.80082819046101150206595775671303272247314453125
+          itineray:
+          - date: date
+            duration: duration
+            terminal: terminal
+            time: time
+            vehicle: vehicle
+          - date: date
+            duration: duration
+            terminal: terminal
+            time: time
+            vehicle: vehicle
+        - net_price_per_person: 6.02745618307040320615897144307382404804229736328125
+          datetime:
+            duration: duration
+            departure:
+              date: date
+              unit: 5.63737665663332876420099637471139430999755859375
+              time: time
+          trip:
+            from:
+              coordinate: coordinate
+              location: location
+              terminal: terminal
+              location_key: location_key
+          total_price: 5.962133916683182377482808078639209270477294921875
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
+          currency: currency
+          service_provider:
+            name: name
+            logo: logo
+            fullname: fullname
+          schedule_id: 0.80082819046101150206595775671303272247314453125
+          itineray:
+          - date: date
+            duration: duration
+            terminal: terminal
+            time: time
+            vehicle: vehicle
+          - date: date
+            duration: duration
+            terminal: terminal
+            time: time
+            vehicle: vehicle
+        status:
+          status: true
+    CheckOfferResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/CheckOfferResponse_message'
+      example:
+        message:
+          data:
+            net_price: 6.02745618307040320615897144307382404804229736328125
+            currency: currency
+            schedule_id: 0.80082819046101150206595775671303272247314453125
+            departure_time:
+              date: date
+              unixtime: 1.46581298050294517310021547018550336360931396484375
+              time: time
+            status: status
+          status: status
+        status:
+          status: true
+    MerchantResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/MerchantResponse_message'
+      example:
+        message:
+          agent_secret: agent_secret
+          agent_name: agent_name
+          user_id: 6.02745618307040320615897144307382404804229736328125
+          current_balance: 1.46581298050294517310021547018550336360931396484375
+          currency: currency
+          telephone: telephone
+          merchant_id: 0.80082819046101150206595775671303272247314453125
+          email: email
+        status:
+          status: true
+    BookingResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/BookingResponse_message'
+      example:
+        message:
+          ticket_detail:
+            notes: notes
+            leader_name: leader_name
+            leader_contact_email: leader_contact_email
+            pickup:
+              location: location
+              time: time
+            travel_date: travel_date
+            travel_date_unix: 7.061401241503109105224211816675961017608642578125
+            leader_contact_telephone: leader_contact_telephone
+            schedule: 5.962133916683182377482808078639209270477294921875
+            to_location: to_location
+            pnr: pnr
+            pax_amount: 9.301444243932575517419536481611430644989013671875
+            b2b_rate: 1.46581298050294517310021547018550336360931396484375
+            from_location: from_location
+            departure:
+              station: station
+              gps:
+                lattitude: 5.63737665663332876420099637471139430999755859375
+                longitude: 2.3021358869347654518833223846741020679473876953125
+              time: time
+            leader_contact_nationality: leader_contact_nationality
+            status: status
+          transaction_detail:
+            agent_user_id: 0.80082819046101150206595775671303272247314453125
+            total_payment_amount: 6.02745618307040320615897144307382404804229736328125
+            invoice_code: invoice_code
+            agent_secret: agent_secret
+            payment_status: true
+            ticket_reference_id: ticket_reference_id
+        status:
+          status: true
+    TicketResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail'
+      example:
+        message:
+          notes: notes
+          leader_name: leader_name
+          leader_contact_email: leader_contact_email
+          pickup:
+            location: location
+            time: time
+          travel_date: travel_date
+          travel_date_unix: 7.061401241503109105224211816675961017608642578125
+          leader_contact_telephone: leader_contact_telephone
+          schedule: 5.962133916683182377482808078639209270477294921875
+          to_location: to_location
+          pnr: pnr
+          pax_amount: 9.301444243932575517419536481611430644989013671875
+          b2b_rate: 1.46581298050294517310021547018550336360931396484375
+          from_location: from_location
+          departure:
+            station: station
+            gps:
+              lattitude: 5.63737665663332876420099637471139430999755859375
+              longitude: 2.3021358869347654518833223846741020679473876953125
+            time: time
+          leader_contact_nationality: leader_contact_nationality
+          status: status
+        status:
+          status: true
+    AllBookingResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/AllBookingResponse_message'
+      example:
+        message:
+          pastTrip:
+          - null
+          - null
+          currentTrip:
+          - schedule: 0.80082819046101150206595775671303272247314453125
+            pnr: pnr
+            leader_name: leader_name
+            leader_contact_email: leader_contact_email
+            pax_amount: 1.46581298050294517310021547018550336360931396484375
+            travel_date: travel_date
+            leader_contact_nationality: leader_contact_nationality
+            travel_date_unix: 6.02745618307040320615897144307382404804229736328125
+            leader_contact_telephone: leader_contact_telephone
+            status: status
+          - schedule: 0.80082819046101150206595775671303272247314453125
+            pnr: pnr
+            leader_name: leader_name
+            leader_contact_email: leader_contact_email
+            pax_amount: 1.46581298050294517310021547018550336360931396484375
+            travel_date: travel_date
+            leader_contact_nationality: leader_contact_nationality
+            travel_date_unix: 6.02745618307040320615897144307382404804229736328125
+            leader_contact_telephone: leader_contact_telephone
+            status: status
+        status:
+          status: true
+    CancellationResponse:
+      required:
+      - message
+      - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/LoginUserResponse_status'
+        message:
+          $ref: '#/components/schemas/CancellationResponse_message'
+      example:
+        message:
+          refund_policy: refund_policy
+          departure_date: departure_date
+          policy_description: policy_description
+          refund_amount: 0.80082819046101150206595775671303272247314453125
+        status:
+          status: true
+    MerchantCreateRequest:
+      required:
+      - agent_secret
+      type: object
+      properties:
+        agent_secret:
+          maxLength: 48
+          minLength: 3
+          type: string
+        agent_name:
+          maxLength: 200
+          minLength: 3
+          type: string
+        email:
+          maxLength: 48
+          minLength: 3
+          type: string
+          format: email
+        telephone:
+          maxLength: 48
+          minLength: 3
+          type: string
+    MerchantTopupRequest:
+      required:
+      - agent_secret
+      - topup_amount
+      type: object
+      properties:
+        agent_secret:
+          maxLength: 48
+          minLength: 3
+          type: string
+        topup_amount:
+          maximum: 10000000
+          minimum: 0
+          type: number
+    CancellationCreateRequest:
+      required:
+      - merchant_secret_id
+      - ticket_reference_id
+      type: object
+      properties:
+        ticket_reference_id:
+          maxLength: 48
+          minLength: 3
+          type: string
+        merchant_secret_id:
+          maxLength: 48
+          minLength: 3
+          type: string
+    BookingCreateRequest:
+      required:
+      - leader_contact_email
+      - leader_first_name
+      - leader_last_name
+      - leader_locale
+      - leader_nationality
+      - leader_title
+      - merchant_secret_id
+      - passengers
+      - pax_amount
+      - schedule_id
+      type: object
+      properties:
+        merchant_secret_id:
+          maxLength: 48
+          minLength: 3
+          type: string
+        schedule_id:
+          minimum: 1
+          type: number
+        pax_amount:
+          maximum: 10
+          minimum: 1
+          type: number
+        leader_title:
+          maxLength: 20
+          minLength: 1
+          type: string
+        leader_first_name:
+          maxLength: 200
+          minLength: 1
+          type: string
+        leader_last_name:
+          maxLength: 200
+          minLength: 1
+          type: string
+        leader_nationality:
+          type: string
+        leader_gender:
+          type: string
+        leader_contact_email:
+          maxLength: 48
+          minLength: 3
+          type: string
+          format: email
+        leader_contact_telephone:
+          maxLength: 48
+          minLength: 3
+          type: string
+        leader_passport_number:
+          type: string
+        leader_locale:
+          type: string
+        passengers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingCreateRequest_passengers'
+        pickup:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
+        dropoff:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
+    LoginUserResponse_status:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: boolean
+      example:
+        status: true
+    LoginUserResponse_message:
+      required:
+      - access_token
+      type: object
+      properties:
+        access_token:
+          type: string
+      example:
+        access_token: access_token
+    OfferResponse_trip_from:
+      required:
+      - coordinate
+      - location
+      - location_key
+      - terminal
+      type: object
+      properties:
+        location:
+          type: string
+        location_key:
+          type: string
+        terminal:
+          type: string
+        coordinate:
+          type: string
+      example:
+        coordinate: coordinate
+        location: location
+        terminal: terminal
+        location_key: location_key
+    OfferResponse_trip:
+      required:
+      - from
+      - to
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/OfferResponse_trip_from'
+        to:
+          $ref: '#/components/schemas/OfferResponse_trip_from'
+      example:
+        from:
+          coordinate: coordinate
+          location: location
+          terminal: terminal
+          location_key: location_key
+    OfferResponse_service_provider:
+      required:
+      - fullname
+      - logo
+      - name
+      type: object
+      properties:
+        fullname:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+      example:
+        name: name
+        logo: logo
+        fullname: fullname
+    OfferResponse_datetime_departure:
+      required:
+      - date
+      - time
+      - unit
+      type: object
+      properties:
+        date:
+          type: string
+        unit:
+          type: number
+        time:
+          type: string
+      example:
+        date: date
+        unit: 5.63737665663332876420099637471139430999755859375
+        time: time
+    OfferResponse_datetime:
+      required:
+      - arrival
+      - departure
+      - duration
+      type: object
+      properties:
+        departure:
+          $ref: '#/components/schemas/OfferResponse_datetime_departure'
+        arrival:
+          $ref: '#/components/schemas/OfferResponse_datetime_departure'
+        duration:
+          type: string
+      example:
+        duration: duration
+        departure:
+          date: date
+          unit: 5.63737665663332876420099637471139430999755859375
+          time: time
+    OfferResponse_itineray:
+      required:
+      - date
+      - duration
+      - terminal
+      - time
+      - vehicle
+      type: object
+      properties:
+        terminal:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        duration:
+          type: string
+        vehicle:
+          type: string
+      example:
+        date: date
+        duration: duration
+        terminal: terminal
+        time: time
+        vehicle: vehicle
+    OfferResponse_message:
+      required:
+      - currency
+      - datetime
+      - net_price_per_person
+      - pax_amount
+      - schedule_id
+      - service_provider
+      - total_price
+      type: object
+      properties:
+        schedule_id:
+          type: number
+        net_price_per_person:
+          type: number
+        pax_amount:
+          type: number
+        total_price:
+          type: number
+        currency:
+          type: string
+        trip:
+          $ref: '#/components/schemas/OfferResponse_trip'
+        service_provider:
+          $ref: '#/components/schemas/OfferResponse_service_provider'
+        datetime:
+          $ref: '#/components/schemas/OfferResponse_datetime'
+        itineray:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferResponse_itineray'
+      example:
+        net_price_per_person: 6.02745618307040320615897144307382404804229736328125
+        datetime:
+          duration: duration
+          departure:
+            date: date
+            unit: 5.63737665663332876420099637471139430999755859375
+            time: time
+        trip:
+          from:
+            coordinate: coordinate
+            location: location
+            terminal: terminal
+            location_key: location_key
+        total_price: 5.962133916683182377482808078639209270477294921875
+        pax_amount: 1.46581298050294517310021547018550336360931396484375
+        currency: currency
+        service_provider:
+          name: name
+          logo: logo
+          fullname: fullname
+        schedule_id: 0.80082819046101150206595775671303272247314453125
+        itineray:
+        - date: date
+          duration: duration
+          terminal: terminal
+          time: time
+          vehicle: vehicle
+        - date: date
+          duration: duration
+          terminal: terminal
+          time: time
+          vehicle: vehicle
+    CheckOfferResponse_message_data_departure_time:
+      required:
+      - date
+      - time
+      - unixtime
+      type: object
+      properties:
+        date:
+          type: string
+        time:
+          type: string
+        unixtime:
+          type: number
+      example:
+        date: date
+        unixtime: 1.46581298050294517310021547018550336360931396484375
+        time: time
+    CheckOfferResponse_message_data:
+      required:
+      - arrival_time
+      - currency
+      - departure_time
+      - net_price
+      - schedule_id
+      - status
+      type: object
+      properties:
+        schedule_id:
+          type: number
+        net_price:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+        departure_time:
+          $ref: '#/components/schemas/CheckOfferResponse_message_data_departure_time'
+        arrival_time:
+          $ref: '#/components/schemas/CheckOfferResponse_message_data_departure_time'
+      example:
+        net_price: 6.02745618307040320615897144307382404804229736328125
+        currency: currency
+        schedule_id: 0.80082819046101150206595775671303272247314453125
+        departure_time:
+          date: date
+          unixtime: 1.46581298050294517310021547018550336360931396484375
+          time: time
+        status: status
+    CheckOfferResponse_message:
+      required:
+      - data
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/CheckOfferResponse_message_data'
+      example:
+        data:
+          net_price: 6.02745618307040320615897144307382404804229736328125
+          currency: currency
+          schedule_id: 0.80082819046101150206595775671303272247314453125
+          departure_time:
+            date: date
+            unixtime: 1.46581298050294517310021547018550336360931396484375
+            time: time
+          status: status
+        status: status
+    MerchantResponse_message:
+      required:
+      - agent_name
+      - agent_secret
+      - currency
+      - current_balance
+      - email
+      - merchant_id
+      - telephone
+      - user_id
+      type: object
+      properties:
+        merchant_id:
+          type: number
+        user_id:
+          type: number
+        agent_name:
+          type: string
+        agent_secret:
+          type: string
+        current_balance:
+          type: number
+        currency:
+          type: string
+        email:
+          type: string
+        telephone:
+          type: string
+      example:
+        agent_secret: agent_secret
+        agent_name: agent_name
+        user_id: 6.02745618307040320615897144307382404804229736328125
+        current_balance: 1.46581298050294517310021547018550336360931396484375
+        currency: currency
+        telephone: telephone
+        merchant_id: 0.80082819046101150206595775671303272247314453125
+        email: email
+    BookingResponse_message_transaction_detail:
+      required:
+      - agent_secret
+      - agent_user_id
+      - invoice_code
+      - payment_status
+      - total_payment_amount
+      type: object
+      properties:
+        agent_secret:
+          type: string
+        agent_user_id:
+          type: number
+        total_payment_amount:
+          type: number
+        payment_status:
+          type: boolean
+        invoice_code:
+          type: string
+        ticket_reference_id:
+          type: string
+      example:
+        agent_user_id: 0.80082819046101150206595775671303272247314453125
+        total_payment_amount: 6.02745618307040320615897144307382404804229736328125
+        invoice_code: invoice_code
+        agent_secret: agent_secret
+        payment_status: true
+        ticket_reference_id: ticket_reference_id
+    BookingResponse_message_ticket_detail_departure_gps:
+      required:
+      - lattitude
+      - longitude
+      type: object
+      properties:
+        lattitude:
+          type: number
+        longitude:
+          type: number
+      example:
+        lattitude: 5.63737665663332876420099637471139430999755859375
+        longitude: 2.3021358869347654518833223846741020679473876953125
+    BookingResponse_message_ticket_detail_departure:
+      required:
+      - gps
+      - station
+      - time
+      type: object
+      properties:
+        station:
+          type: string
+        gps:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_departure_gps'
+        time:
+          type: string
+      example:
+        station: station
+        gps:
+          lattitude: 5.63737665663332876420099637471139430999755859375
+          longitude: 2.3021358869347654518833223846741020679473876953125
+        time: time
+    BookingResponse_message_ticket_detail_pickup:
+      required:
+      - location
+      - time
+      type: object
+      properties:
+        location:
+          type: string
+        time:
+          type: string
+      example:
+        location: location
+        time: time
+    BookingResponse_message_ticket_detail:
+      required:
+      - arrival
+      - b2b_rate
+      - departure
+      - from_location
+      - leader_contact_email
+      - leader_contact_nationality
+      - leader_contact_telephone
+      - leader_name
+      - notes
+      - pax_amount
+      - pnr
+      - schedule
+      - status
+      - to_location
+      - travel_date
+      - travel_date_unix
+      type: object
+      properties:
+        pnr:
+          type: string
+        status:
+          type: string
+        b2b_rate:
+          type: number
+        schedule:
+          type: number
+        from_location:
+          type: string
+        to_location:
+          type: string
+        departure:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_departure'
+        arrival:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_departure'
+        travel_date:
+          type: string
+        travel_date_unix:
+          type: number
+        pickup:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
+        dropoff:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
+        notes:
+          type: string
+        pax_amount:
+          type: number
+        leader_name:
+          type: string
+        leader_contact_nationality:
+          type: string
+        leader_contact_email:
+          type: string
+        leader_contact_telephone:
+          type: string
+      example:
+        notes: notes
+        leader_name: leader_name
+        leader_contact_email: leader_contact_email
+        pickup:
+          location: location
+          time: time
+        travel_date: travel_date
+        travel_date_unix: 7.061401241503109105224211816675961017608642578125
+        leader_contact_telephone: leader_contact_telephone
+        schedule: 5.962133916683182377482808078639209270477294921875
+        to_location: to_location
+        pnr: pnr
+        pax_amount: 9.301444243932575517419536481611430644989013671875
+        b2b_rate: 1.46581298050294517310021547018550336360931396484375
+        from_location: from_location
+        departure:
+          station: station
+          gps:
+            lattitude: 5.63737665663332876420099637471139430999755859375
+            longitude: 2.3021358869347654518833223846741020679473876953125
+          time: time
+        leader_contact_nationality: leader_contact_nationality
+        status: status
+    BookingResponse_message:
+      required:
+      - ticket_detail
+      - transaction_detail
+      type: object
+      properties:
+        transaction_detail:
+          $ref: '#/components/schemas/BookingResponse_message_transaction_detail'
+        ticket_detail:
+          $ref: '#/components/schemas/BookingResponse_message_ticket_detail'
+      example:
+        ticket_detail:
+          notes: notes
+          leader_name: leader_name
+          leader_contact_email: leader_contact_email
+          pickup:
+            location: location
+            time: time
+          travel_date: travel_date
+          travel_date_unix: 7.061401241503109105224211816675961017608642578125
+          leader_contact_telephone: leader_contact_telephone
+          schedule: 5.962133916683182377482808078639209270477294921875
+          to_location: to_location
+          pnr: pnr
+          pax_amount: 9.301444243932575517419536481611430644989013671875
+          b2b_rate: 1.46581298050294517310021547018550336360931396484375
+          from_location: from_location
+          departure:
+            station: station
+            gps:
+              lattitude: 5.63737665663332876420099637471139430999755859375
+              longitude: 2.3021358869347654518833223846741020679473876953125
+            time: time
+          leader_contact_nationality: leader_contact_nationality
+          status: status
+        transaction_detail:
+          agent_user_id: 0.80082819046101150206595775671303272247314453125
+          total_payment_amount: 6.02745618307040320615897144307382404804229736328125
+          invoice_code: invoice_code
+          agent_secret: agent_secret
+          payment_status: true
+          ticket_reference_id: ticket_reference_id
+    AllBookingResponse_message_currentTrip:
+      required:
+      - leader_contact_email
+      - leader_contact_nationality
+      - leader_contact_telephone
+      - leader_name
+      - pax_amount
+      - pnr
+      - schedule
+      - status
+      - travel_date
+      - travel_date_unix
+      type: object
+      properties:
+        pnr:
+          type: string
+        status:
+          type: string
+        schedule:
+          type: number
+        travel_date:
+          type: string
+        travel_date_unix:
+          type: number
+        pax_amount:
+          type: number
+        leader_name:
+          type: string
+        leader_contact_nationality:
+          type: string
+        leader_contact_email:
+          type: string
+        leader_contact_telephone:
+          type: string
+      example:
+        schedule: 0.80082819046101150206595775671303272247314453125
+        pnr: pnr
+        leader_name: leader_name
+        leader_contact_email: leader_contact_email
+        pax_amount: 1.46581298050294517310021547018550336360931396484375
+        travel_date: travel_date
+        leader_contact_nationality: leader_contact_nationality
+        travel_date_unix: 6.02745618307040320615897144307382404804229736328125
+        leader_contact_telephone: leader_contact_telephone
+        status: status
+    AllBookingResponse_message:
+      required:
+      - currentTrip
+      - pastTrip
+      type: object
+      properties:
+        currentTrip:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllBookingResponse_message_currentTrip'
+        pastTrip:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllBookingResponse_message_currentTrip'
+      example:
+        pastTrip:
+        - null
+        - null
+        currentTrip:
+        - schedule: 0.80082819046101150206595775671303272247314453125
+          pnr: pnr
+          leader_name: leader_name
+          leader_contact_email: leader_contact_email
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
+          travel_date: travel_date
+          leader_contact_nationality: leader_contact_nationality
+          travel_date_unix: 6.02745618307040320615897144307382404804229736328125
+          leader_contact_telephone: leader_contact_telephone
+          status: status
+        - schedule: 0.80082819046101150206595775671303272247314453125
+          pnr: pnr
+          leader_name: leader_name
+          leader_contact_email: leader_contact_email
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
+          travel_date: travel_date
+          leader_contact_nationality: leader_contact_nationality
+          travel_date_unix: 6.02745618307040320615897144307382404804229736328125
+          leader_contact_telephone: leader_contact_telephone
+          status: status
+    CancellationResponse_message:
+      required:
+      - departure_date
+      - policy_description
+      - refund_policy
+      type: object
+      properties:
+        departure_date:
+          type: string
+        refund_policy:
+          type: string
+        policy_description:
+          type: string
+        refund_amount:
+          type: number
+      example:
+        refund_policy: refund_policy
+        departure_date: departure_date
+        policy_description: policy_description
+        refund_amount: 0.80082819046101150206595775671303272247314453125
+    BookingCreateRequest_passengers:
+      required:
+      - first_name
+      - last_name
+      type: object
+      properties:
+        title:
+          maxLength: 20
+          minLength: 1
+          type: string
+        first_name:
+          maxLength: 200
+          minLength: 1
+          type: string
+        last_name:
+          maxLength: 200
+          minLength: 1
+          type: string
+  securitySchemes: {}
