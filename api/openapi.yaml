@@ -7,7 +7,7 @@ info:
     us any feedback, just drop us a line at support@kohlife.com <br><br> You can register
     to be our merchant partner in the Authentication Section to receive the access
     token. You can use the access token to call other functions (see Exhibit 1) <br><br>
-    <img src=''https://apihandyman.io/images/commons/openapi/openapi-map-v2.png''
+    <img src=''https://docs.google.com/drawings/d/e/2PACX-1vQNVg-kqYNAPTr0mLe5xM-oUdy8zpyPiC2PUf5q7B-ft5sB9GbJwBcP0--XuYVIPJjAemDR1LuqXMeR/pub?w=1266&h=730''
     /> <br><br> You''ll need to understand a few important concepts to get started
     with finding and booking transport using the Kohlife API. Our booking process
     is including 5 steps of service <ul> <li><b>Authentication:</b> You have to authentication
