@@ -1,7 +1,28 @@
 openapi: 3.0.0
 info:
   title: KOHLIFE API
-  description: This is kohlife API
+  description: '<b>Welcome to the documentation for the Kohlife API.</b> <br><br>  Having
+    API documentation that is correct, up-to-date and easy to understand is really
+    important to us. If you have any questions, spot any mistakes or want to give
+    us any feedback, just drop us a line at support@kohlife.com <br><br> You can register
+    to be our merchant partner in the Authentication Section to receive the access
+    token. You can use the access token to call other functions (see Exhibit 1) <br><br>
+    <img src=''https://apihandyman.io/images/commons/openapi/openapi-map-v2.png''
+    /> <br><br> You''ll need to understand a few important concepts to get started
+    with finding and booking transport using the Kohlife API. Our booking process
+    is including 5 steps of service <ul> <li><b>Authentication:</b> You have to authentication
+    your merchant account to receive the access token to use our API. Each token can
+    be used for 30 days after it’s generated.</li> <li><b>Merchant:</b> You can check
+    your merchant account information with Merchant Service. We will return real-time
+    update information such as balance, account status.</li> <li><b>Offer:</b> You
+    can use Offer Service to search for available trips in each route.</li> <li><b>Booking:</b>
+    After you search and found an available trip with Offer Service, in order to make
+    a booking of the trip you can use our Booking Service.</li> <li><b>Cancellation:</b>
+    After your booking is completed, you can amend the booking via Cancellation Service.
+    </li></ul> <br><br> This API documentation has been processed on OPENAPI V3.0
+    Standard and Dynamically Deploy on Swagger UI. You can test to call the function
+    by using the “Try it out” button, after that, you can use fill in the Parameter
+    and Request Body and press the “Execute” button to send the API request. '
   version: 1.0.0
 servers:
 - url: https://an0w7gywf8.execute-api.ap-southeast-1.amazonaws.com/prod
@@ -37,25 +58,7 @@ paths:
       summary: Available Station request
       description: Valid Station request
       operationId: getStation
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       responses:
         "200":
           description: Status 200 Response
@@ -63,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StationResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Offer
   /offer/{from}/{to}/{date}/{amount}:
     get:
@@ -97,7 +102,7 @@ paths:
         style: simple
         explode: false
         schema:
-          pattern: '[1-9]{4}-[0-9]{2}-[0-9]{2}'
+          pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}'
           type: string
           example: 2020-06-09
       - name: amount
@@ -107,28 +112,10 @@ paths:
         style: simple
         explode: false
         schema:
-          maximum: 20
+          maximum: 10
           minimum: 1
           type: number
           example: 2
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
       responses:
         "200":
           description: Status 200 Response
@@ -136,6 +123,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OfferResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Offer
   /offer-check/{schedule_id}:
     get:
@@ -153,25 +142,7 @@ paths:
         explode: false
         schema:
           type: integer
-          example: 12345678
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+          example: 1433021
       responses:
         "200":
           description: Status 200 Response
@@ -179,6 +150,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CheckOfferResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Offer
   /merchant:
     get:
@@ -187,25 +160,7 @@ paths:
       summary: Merchant get
       description: Merchant get request
       operationId: getMerchant
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       responses:
         "200":
           description: Status 200 Response
@@ -213,6 +168,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Merchant
     put:
       tags:
@@ -220,25 +177,7 @@ paths:
       summary: Merchant Topup Request (function for ADMIN only)
       description: Merchant topup request
       operationId: topupMerchant
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -251,6 +190,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Merchant
     post:
       tags:
@@ -258,25 +199,7 @@ paths:
       summary: Merchant Create Request
       description: Merchant new request
       operationId: createMerchant
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -289,6 +212,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Merchant
   /booking/create:
     post:
@@ -297,25 +222,7 @@ paths:
       summary: Create booking Request
       description: Booking new request
       operationId: creatBooking
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -328,6 +235,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookingResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Booking
   /booking/{ticket_reference_id}:
     get:
@@ -345,24 +254,6 @@ paths:
         explode: false
         schema:
           type: integer
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
       responses:
         "200":
           description: Status 200 Response
@@ -370,6 +261,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Booking
   /bookings:
     get:
@@ -378,25 +271,7 @@ paths:
       summary: Inspect Tickets from this MERCHANT
       description: Ticket all get request
       operationId: getAllBooking
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       responses:
         "200":
           description: Status 200 Response
@@ -404,6 +279,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AllBookingResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Booking
   /cancellations/check/{ticket_reference_id}:
     get:
@@ -421,24 +298,6 @@ paths:
         explode: false
         schema:
           type: integer
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
       responses:
         "200":
           description: Status 200 Response
@@ -446,6 +305,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancellationResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Cancellation
   /cancellations/create:
     post:
@@ -454,25 +315,7 @@ paths:
       summary: Create cancellation of this ticket
       description: Cancellation create request
       operationId: postCancellation
-      parameters:
-      - name: Content-Type
-        in: header
-        description: Content Type header
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: application/json
-      - name: Authorization
-        in: header
-        description: Auth Header please get from Login response
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: Bearer AUTHORIZATION_CODE ....
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -485,24 +328,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancellationResponse'
+      security:
+      - bearerAuth: []
       x-swagger-router-controller: Cancellation
 components:
   schemas:
-    LoginUserRequest:
-      required:
-      - email
-      - password
-      type: object
-      properties:
-        email:
-          maxLength: 48
-          minLength: 3
-          type: string
-          format: email
-        password:
-          maxLength: 48
-          minLength: 3
-          type: string
     LoginUserResponse:
       required:
       - message
@@ -803,6 +633,24 @@ components:
           refund_amount: 0.80082819046101150206595775671303272247314453125
         status:
           status: true
+    LoginUserRequest:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          maxLength: 48
+          minLength: 3
+          type: string
+          format: email
+        password:
+          maxLength: 48
+          minLength: 3
+          type: string
+      example:
+        email: example@kohlife.com
+        password: kohlife2020
     MerchantCreateRequest:
       required:
       - agent_secret
@@ -825,6 +673,11 @@ components:
           maxLength: 48
           minLength: 3
           type: string
+      example:
+        agent_secret: supersecret
+        agent_name: example_company
+        email: example@kohlife.com
+        telephone: +66-099-9009
     MerchantTopupRequest:
       required:
       - agent_secret
@@ -839,6 +692,9 @@ components:
           maximum: 10000000
           minimum: 0
           type: number
+      example:
+        agent_secret: supersecret
+        topup_amount: "10000"
     CancellationCreateRequest:
       required:
       - merchant_secret_id
@@ -853,6 +709,9 @@ components:
           maxLength: 48
           minLength: 3
           type: string
+      example:
+        ticket_reference_id: KL10OU9
+        merchant_secret_id: supersecret
     BookingCreateRequest:
       required:
       - leader_contact_email
@@ -915,6 +774,25 @@ components:
           $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
         dropoff:
           $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
+      example:
+        merchant_secret_id: supersecret
+        schedule_id: 1433021
+        pax_amount: 2
+        leader_title: Mr.
+        leader_first_name: Example
+        leader_last_name: Kohlife
+        leader_nationality: TH
+        leader_gender: Male
+        leader_contact_email: example@kohlife.com
+        leader_contact_telephone: "76909847814"
+        leader_locale: Thai
+        passengers:
+        - title: Mr.
+          first_name: Chin
+          last_name: Craig
+        - title: Ms.
+          first_name: Chali
+          last_name: Chote
     LoginUserResponse_status:
       required:
       - status
@@ -1535,4 +1413,9 @@ components:
           maxLength: 200
           minLength: 1
           type: string
-  securitySchemes: {}
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Enter your bearer token in the format **Bearer &lt;token>**
+      scheme: bearer
+      bearerFormat: JWT
