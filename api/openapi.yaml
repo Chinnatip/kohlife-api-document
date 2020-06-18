@@ -25,10 +25,8 @@ info:
     and Request Body and press the “Execute” button to send the API request. '
   version: 1.0.0
 servers:
-- url: http://localhost:5000
+- url: https://d1pz13ossgd241.cloudfront.net#https://1iu056b482.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
-- url: https://an0w7gywf8.execute-api.ap-southeast-1.amazonaws.com/prod
-  description: Production server (uses live data)
 paths:
   /auth/login:
     post:
@@ -654,6 +652,9 @@ components:
             travel_date_unix: 6.02745618307040320615897144307382404804229736328125
             leader_contact_telephone: leader_contact_telephone
             status: status
+          refundTrip:
+          - null
+          - null
         status:
           status: true
     CancellationResponse:
@@ -689,9 +690,6 @@ components:
           maxLength: 48
           minLength: 3
           type: string
-      example:
-        email: example@kohlife.com
-        password: example-password
     MerchantCreateRequest:
       required:
       - agent_secret
@@ -714,11 +712,6 @@ components:
           maxLength: 48
           minLength: 3
           type: string
-      example:
-        agent_secret: supersecret
-        agent_name: example_company
-        email: example@kohlife.com
-        telephone: +66-099-9009
     MerchantTopupRequest:
       required:
       - agent_secret
@@ -733,9 +726,6 @@ components:
           maximum: 10000000
           minimum: 0
           type: number
-      example:
-        agent_secret: supersecret
-        topup_amount: "10000"
     CancellationCreateRequest:
       required:
       - merchant_secret_id
@@ -750,9 +740,6 @@ components:
           maxLength: 48
           minLength: 3
           type: string
-      example:
-        ticket_reference_id: KL10OU9
-        merchant_secret_id: supersecret
     BookingCreateRequest:
       required:
       - leader_contact_email
@@ -815,25 +802,6 @@ components:
           $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
         dropoff:
           $ref: '#/components/schemas/BookingResponse_message_ticket_detail_pickup'
-      example:
-        merchant_secret_id: supersecret
-        schedule_id: 1433021
-        pax_amount: 2
-        leader_title: Mr.
-        leader_first_name: Example
-        leader_last_name: Kohlife
-        leader_nationality: TH
-        leader_gender: Male
-        leader_contact_email: example@kohlife.com
-        leader_contact_telephone: "76909847814"
-        leader_locale: Thai
-        passengers:
-        - title: Mr.
-          first_name: Chin
-          last_name: Craig
-        - title: Ms.
-          first_name: Chali
-          last_name: Chote
     LoginUserResponse_status:
       required:
       - status
@@ -1381,6 +1349,7 @@ components:
       required:
       - currentTrip
       - pastTrip
+      - refundTrip
       type: object
       properties:
         currentTrip:
@@ -1388,6 +1357,10 @@ components:
           items:
             $ref: '#/components/schemas/AllBookingResponse_message_currentTrip'
         pastTrip:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllBookingResponse_message_currentTrip'
+        refundTrip:
           type: array
           items:
             $ref: '#/components/schemas/AllBookingResponse_message_currentTrip'
@@ -1416,6 +1389,9 @@ components:
           travel_date_unix: 6.02745618307040320615897144307382404804229736328125
           leader_contact_telephone: leader_contact_telephone
           status: status
+        refundTrip:
+        - null
+        - null
     CancellationResponse_message:
       required:
       - departure_date
