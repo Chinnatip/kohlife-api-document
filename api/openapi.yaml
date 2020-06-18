@@ -7,7 +7,7 @@ info:
     us any feedback, just drop us a line at support@kohlife.com <br><br> You can register
     to be our merchant partner in the Authentication Section to receive the access
     token. You can use the access token to call other functions (see Exhibit 1) <br><br>
-    <img src=''https://docs.google.com/drawings/d/e/2PACX-1vQNVg-kqYNAPTr0mLe5xM-oUdy8zpyPiC2PUf5q7B-ft5sB9GbJwBcP0--XuYVIPJjAemDR1LuqXMeR/pub?w=1266&h=730''
+    <img style=''max-height: 540px; margin: auto;display: block;'' src=''https://docs.google.com/drawings/d/e/2PACX-1vQNVg-kqYNAPTr0mLe5xM-oUdy8zpyPiC2PUf5q7B-ft5sB9GbJwBcP0--XuYVIPJjAemDR1LuqXMeR/pub?w=1266&h=730''
     /> <br><br> You''ll need to understand a few important concepts to get started
     with finding and booking transport using the Kohlife API. Our booking process
     is including 5 steps of service <ul> <li><b>Authentication:</b> You have to authentication
@@ -25,17 +25,21 @@ info:
     and Request Body and press the “Execute” button to send the API request. '
   version: 1.0.0
 servers:
+- url: http://localhost:5000
+  description: Sandbox server (uses test data)
 - url: https://an0w7gywf8.execute-api.ap-southeast-1.amazonaws.com/prod
   description: Production server (uses live data)
-- url: https://1iu056b482.execute-api.ap-southeast-1.amazonaws.com/dev
-  description: Sandbox server (uses test data)
 paths:
   /auth/login:
     post:
       tags:
       - Authentication
       summary: Login Request
-      description: Login new request
+      description: Login to receive the access token, you can use this token to use
+        in the header of other services. In order to send a request to receive the
+        token you have to set the RequestBody to match the schema including email
+        and password of your account. If you do not have an account yet, please contact
+        support@kohlife.com
       operationId: login
       parameters: []
       requestBody:
@@ -51,12 +55,86 @@ paths:
               schema:
                 $ref: '#/components/schemas/LoginUserResponse'
       x-swagger-router-controller: Authentication
+  /merchant:
+    get:
+      tags:
+      - Merchant
+      summary: Get Merchant Detail
+      description: You can request to see your merchant account information from Access
+        Token which is linked to your merchant detail. It will return your “Agent
+        Secret Code”, “Account Current Balance”, “Currency”, and “Contact Information”
+      operationId: getMerchant
+      parameters: []
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
+      x-swagger-router-controller: Merchant
+    put:
+      tags:
+      - Merchant
+      summary: Top-up merchant balance (function for KOHLIFE Admin only)
+      description: You can top up your account by contacting your Kohlife account
+        manager.
+      operationId: topupMerchant
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantTopupRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
+      x-swagger-router-controller: Merchant
+    post:
+      tags:
+      - Merchant
+      summary: Create Merchant from user Access token
+      description: You can upgrade your account status from “Standard Account” to
+        “Merchant Account” by using “Create Merchant from user Access token” action.
+        (If you already have “Merchant Account” the status will not be changed). In
+        order to upgrade the status to “Merchant Account” you have to attach RequestBody
+        as the structure we guided (Request > Schema > MerchantCreateRequest to fill
+        the data). You can create your own “merchant_secrt” code and use it as a password
+        for your privacy.
+      operationId: createMerchant
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantCreateRequest'
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantResponse'
+      security:
+      - bearerAuth: []
+      x-swagger-router-controller: Merchant
   /stations:
     get:
       tags:
       - Offer
-      summary: Available Station request
-      description: Valid Station request
+      summary: Get available station lists
+      description: This service is for requesting the name of “stations”. You will
+        receive the list of station in Hash Array format of the location (Please see
+        response example). You will need the station names in order to send request
+        for further booking process.
       operationId: getStation
       parameters: []
       responses:
@@ -73,8 +151,12 @@ paths:
     get:
       tags:
       - Offer
-      summary: Find offer Request
-      description: Offer new request
+      summary: Find available offer
+      description: This service is for searching the available trips (the trips in
+        our system are constantly changing). Please fill in the data as parameter
+        specifications and press “call api” to see available trips (Each trip will
+        include the “schedule_id”, please keep the “schedule_id” of the trip you choose
+        in the cart to process the booking or checking the trip status).
       operationId: getOffer
       parameters:
       - name: from
@@ -130,8 +212,10 @@ paths:
     get:
       tags:
       - Offer
-      summary: Check offer Request
-      description: Check offer request
+      summary: Check available offer
+      description: You can use “check available offer” service to check the status
+        of the trip of your “schedule_id”. This function is helpful to double check
+        the availability of the trip before your customer is making a final payment.
       operationId: checkOffer
       parameters:
       - name: schedule_id
@@ -153,74 +237,20 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Offer
-  /merchant:
-    get:
-      tags:
-      - Merchant
-      summary: Merchant get
-      description: Merchant get request
-      operationId: getMerchant
-      parameters: []
-      responses:
-        "200":
-          description: Status 200 Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MerchantResponse'
-      security:
-      - bearerAuth: []
-      x-swagger-router-controller: Merchant
-    put:
-      tags:
-      - Merchant
-      summary: Merchant Topup Request (function for ADMIN only)
-      description: Merchant topup request
-      operationId: topupMerchant
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MerchantTopupRequest'
-      responses:
-        "200":
-          description: Status 200 Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MerchantResponse'
-      security:
-      - bearerAuth: []
-      x-swagger-router-controller: Merchant
-    post:
-      tags:
-      - Merchant
-      summary: Merchant Create Request
-      description: Merchant new request
-      operationId: createMerchant
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MerchantCreateRequest'
-      responses:
-        "200":
-          description: Status 200 Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MerchantResponse'
-      security:
-      - bearerAuth: []
-      x-swagger-router-controller: Merchant
   /booking/create:
     post:
       tags:
       - Booking
       summary: Create booking Request
-      description: Booking new request
+      description: This service will allow you to process the booking. Before making
+        a booking please check the trip status of the “schedule_id” with the “check
+        available offer” function to make sure the trip is available. After the booking
+        is completed, your balance will be deducted from “current balance” in your
+        Merchant ID (If your account doesn’t have enough balance, our system will
+        decline your booking). So please prepare the correct “agent_secret” of your
+        Merchant ID and specific amount of passenger in RequestBody. <br><br> *Our
+        API Version 1.0, the hotel pick-up/drop-off is not available yet. We are adding
+        this service in the following version soon.
       operationId: creatBooking
       parameters: []
       requestBody:
@@ -242,8 +272,10 @@ paths:
     get:
       tags:
       - Booking
-      summary: Inspect Ticket by TICKET-REFERENCE-ID
-      description: Ticket get request
+      summary: Inspect booking by PNR code
+      description: You can check the passenger ticket by attaching PNR Code of the
+        ticket in the parameter of this API call. This PNR code has to be the same
+        code with Merchant ID and the Access Token.
       operationId: getBooking
       parameters:
       - name: ticket_reference_id
@@ -253,7 +285,8 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
+          example: KL000XXXX
       responses:
         "200":
           description: Status 200 Response
@@ -268,8 +301,10 @@ paths:
     get:
       tags:
       - Booking
-      summary: Inspect Tickets from this MERCHANT
-      description: Ticket all get request
+      summary: Inspect bookings in your merchant lists
+      description: You can call this function to see all the trips you have booked
+        with your Merchant ID. You can also see the status of “current trip” and “past
+        trip”. For further information of each trip, you can call to /booking/{ticket_reference_id}.
       operationId: getAllBooking
       parameters: []
       responses:
@@ -286,8 +321,10 @@ paths:
     get:
       tags:
       - Cancellation
-      summary: Check cancellation policy of this ticket
-      description: Cancellation check request
+      summary: Check cancellation policy of booking
+      description: You can check the refund policy of each booking with this function.
+        Please attach PNR code before the call. You can see the cancellation term
+        and policy via this link.
       operationId: getCancelCondition
       parameters:
       - name: ticket_reference_id
@@ -297,7 +334,8 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
+          example: KL000XXXX
       responses:
         "200":
           description: Status 200 Response
@@ -312,8 +350,11 @@ paths:
     post:
       tags:
       - Cancellation
-      summary: Create cancellation of this ticket
-      description: Cancellation create request
+      summary: Cancel booking
+      description: You can call “cancel ticket” to cancel your booking and receive
+        the refund as the policy of the ticket. The refund amount will be added to
+        your account current balance of your Merchant ID. Please contact support@kohlife.com
+        if you need any assistance.
       operationId: postCancellation
       parameters: []
       requestBody:
@@ -650,7 +691,7 @@ components:
           type: string
       example:
         email: example@kohlife.com
-        password: kohlife2020
+        password: example-password
     MerchantCreateRequest:
       required:
       - agent_secret
