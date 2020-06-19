@@ -73,57 +73,6 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Merchant
-    put:
-      tags:
-      - Merchant
-      summary: Top-up merchant balance (function for KOHLIFE Admin only)
-      description: You can top up your account by contacting your Kohlife account
-        manager.
-      operationId: topupMerchant
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MerchantTopupRequest'
-      responses:
-        "200":
-          description: Status 200 Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MerchantResponse'
-      security:
-      - bearerAuth: []
-      x-swagger-router-controller: Merchant
-    post:
-      tags:
-      - Merchant
-      summary: Create Merchant from user Access token
-      description: You can upgrade your account status from “Standard Account” to
-        “Merchant Account” by using “Create Merchant from user Access token” action.
-        (If you already have “Merchant Account” the status will not be changed). In
-        order to upgrade the status to “Merchant Account” you have to attach RequestBody
-        as the structure we guided (Request > Schema > MerchantCreateRequest to fill
-        the data). You can create your own “merchant_secrt” code and use it as a password
-        for your privacy.
-      operationId: createMerchant
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MerchantCreateRequest'
-      responses:
-        "200":
-          description: Status 200 Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MerchantResponse'
-      security:
-      - bearerAuth: []
-      x-swagger-router-controller: Merchant
   /stations:
     get:
       tags:
