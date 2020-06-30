@@ -23,10 +23,10 @@ info:
     Standard and Dynamically Deploy on Swagger UI. You can test to call the function
     by using the “Try it out” button, after that, you can use fill in the Parameter
     and Request Body and press the “Execute” button to send the API request. <br><br>issue
-    fix v.1.0.1 <br>- change execution-api path from 1iu056b482 to 6jmrasat4k <br>-
-    fixed wording ''search for available offer'' <br>- add Station detail and Terminal
+    fix v.1.0.2 <br>- change execution-api path from 1iu056b482 to 6jmrasat4k <br>-
+    fixed wording ''search for available offer'' <br>- add Destiantion and Station
     API <br>- hide unused Merchant API <br>- change parameter ''pnr_id'' to ''PNR_id'''
-  version: 1.0.1
+  version: 1.0.2
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
@@ -97,12 +97,12 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
-  /stations/detail:
+  /destination/detail:
     get:
       tags:
       - Location
-      summary: Get whole station details
-      description: This service is for requesting the information of “stations”
+      summary: Get whole destination details
+      description: This service is for requesting the information of “destinations”
       operationId: getStationDetail
       parameters: []
       responses:
@@ -115,12 +115,12 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
-  /terminals/detail:
+  /station/detail:
     get:
       tags:
       - Location
-      summary: Get whole available terminal details
-      description: 'This service is for requesting the information of terminals. '
+      summary: Get whole available station details
+      description: 'This service is for requesting the information of stations. '
       operationId: getTerminalDetail
       parameters: []
       responses:
