@@ -25,8 +25,11 @@ info:
     and Request Body and press the “Execute” button to send the API request. <br><br>issue
     fix v.1.0.2 <br>- change execution-api path from 1iu056b482 to 6jmrasat4k <br>-
     fixed wording ''search for available offer'' <br>- add Destiantion and Station
-    API <br>- hide unused Merchant API <br>- change parameter ''pnr_id'' to ''PNR_id'''
-  version: 1.0.2
+    API <br>- hide unused Merchant API <br>- change parameter ''pnr_id'' to ''PNR_id''
+    <br><br>issue fix v.1.0.3 <br>- fixed text property Terminal => Station <br>-
+    fixed text property Station => Destination <br>- fixed text Unit => Unix <br>-
+    fixed pricing policy'
+  version: 1.0.3
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
@@ -76,15 +79,15 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Merchant
-  /stations:
+  /destinations:
     get:
       tags:
       - Location
-      summary: Get available station lists
-      description: This service is for requesting the name of “stations”. You will
-        receive the list of station in Hash Array format of the location (Please see
-        response example). You will need the station names in order to send request
-        for further booking process.
+      summary: Get available destination lists
+      description: This service is for requesting the name of “destinations”. You
+        will receive the list of destination in Hash Array format of the location
+        (Please see response example). You will need the station names in order to
+        send request for further booking process.
       operationId: getStation
       parameters: []
       responses:
@@ -103,7 +106,7 @@ paths:
       - Location
       summary: Get whole destination details
       description: This service is for requesting the information of “destinations”
-      operationId: getStationDetail
+      operationId: getDestinationDetail
       parameters: []
       responses:
         "200":
@@ -121,7 +124,7 @@ paths:
       - Location
       summary: Get whole available station details
       description: 'This service is for requesting the information of stations. '
-      operationId: getTerminalDetail
+      operationId: getStationDetail
       parameters: []
       responses:
         "200":
@@ -129,7 +132,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TerminalDetailResponse'
+                $ref: '#/components/schemas/StationDetailResponse'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
@@ -418,7 +421,7 @@ components:
           longitude: 1.4658129805029452
         status:
           status: true
-    TerminalDetailResponse:
+    StationDetailResponse:
       required:
       - message
       - status
@@ -427,7 +430,7 @@ components:
         status:
           $ref: '#/components/schemas/LoginUserResponse_status'
         message:
-          $ref: '#/components/schemas/TerminalDetailResponse_message'
+          $ref: '#/components/schemas/StationDetailResponse_message'
       example:
         message:
           country: country
@@ -460,13 +463,13 @@ components:
             duration: duration
             departure:
               date: date
-              unit: 5.637376656633329
               time: time
+              unix: 5.637376656633329
           trip:
             from:
               coordinate: coordinate
+              station: station
               location: location
-              terminal: terminal
               location_key: location_key
           total_price: 5.962133916683182
           pax_amount: 1.4658129805029452
@@ -479,12 +482,12 @@ components:
           itineray:
           - date: date
             duration: duration
-            terminal: terminal
+            station: station
             time: time
             vehicle: vehicle
           - date: date
             duration: duration
-            terminal: terminal
+            station: station
             time: time
             vehicle: vehicle
         - net_price_per_person: 6.027456183070403
@@ -492,13 +495,13 @@ components:
             duration: duration
             departure:
               date: date
-              unit: 5.637376656633329
               time: time
+              unix: 5.637376656633329
           trip:
             from:
               coordinate: coordinate
+              station: station
               location: location
-              terminal: terminal
               location_key: location_key
           total_price: 5.962133916683182
           pax_amount: 1.4658129805029452
@@ -511,12 +514,12 @@ components:
           itineray:
           - date: date
             duration: duration
-            terminal: terminal
+            station: station
             time: time
             vehicle: vehicle
           - date: date
             duration: duration
-            terminal: terminal
+            station: station
             time: time
             vehicle: vehicle
         status:
@@ -923,7 +926,7 @@ components:
         location_id: 0
         location_type: location_type
         longitude: 1.4658129805029452
-    TerminalDetailResponse_message:
+    StationDetailResponse_message:
       required:
       - address
       - country
@@ -969,21 +972,21 @@ components:
       - coordinate
       - location
       - location_key
-      - terminal
+      - station
       type: object
       properties:
         location:
           type: string
         location_key:
           type: string
-        terminal:
+        station:
           type: string
         coordinate:
           type: string
       example:
         coordinate: coordinate
+        station: station
         location: location
-        terminal: terminal
         location_key: location_key
     OfferResponse_trip:
       required:
@@ -998,8 +1001,8 @@ components:
       example:
         from:
           coordinate: coordinate
+          station: station
           location: location
-          terminal: terminal
           location_key: location_key
     OfferResponse_service_provider:
       required:
@@ -1022,19 +1025,19 @@ components:
       required:
       - date
       - time
-      - unit
+      - unix
       type: object
       properties:
         date:
           type: string
-        unit:
+        unix:
           type: number
         time:
           type: string
       example:
         date: date
-        unit: 5.637376656633329
         time: time
+        unix: 5.637376656633329
     OfferResponse_datetime:
       required:
       - arrival
@@ -1052,18 +1055,18 @@ components:
         duration: duration
         departure:
           date: date
-          unit: 5.637376656633329
           time: time
+          unix: 5.637376656633329
     OfferResponse_itineray:
       required:
       - date
       - duration
-      - terminal
+      - station
       - time
       - vehicle
       type: object
       properties:
-        terminal:
+        station:
           type: string
         date:
           type: string
@@ -1076,7 +1079,7 @@ components:
       example:
         date: date
         duration: duration
-        terminal: terminal
+        station: station
         time: time
         vehicle: vehicle
     OfferResponse_message:
@@ -1116,13 +1119,13 @@ components:
           duration: duration
           departure:
             date: date
-            unit: 5.637376656633329
             time: time
+            unix: 5.637376656633329
         trip:
           from:
             coordinate: coordinate
+            station: station
             location: location
-            terminal: terminal
             location_key: location_key
         total_price: 5.962133916683182
         pax_amount: 1.4658129805029452
@@ -1135,12 +1138,12 @@ components:
         itineray:
         - date: date
           duration: duration
-          terminal: terminal
+          station: station
           time: time
           vehicle: vehicle
         - date: date
           duration: duration
-          terminal: terminal
+          station: station
           time: time
           vehicle: vehicle
     CheckOfferResponse_message_data_departure_time:
