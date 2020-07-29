@@ -28,8 +28,8 @@ info:
     API <br>- hide unused Merchant API <br>- change parameter ''pnr_id'' to ''PNR_id''
     <br><br>issue fix v.1.0.3 <br>- fixed text property Terminal => Station <br>-
     fixed text property Station => Destination <br>- fixed text Unit => Unix <br>-
-    fixed pricing policy'
-  version: 1.0.3
+    fixed pricing policy <br><br>issue fix v.1.0.4 <br>- fixed Error response report'
+  version: 1.0.4
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
@@ -58,6 +58,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoginUserResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       x-swagger-router-controller: Authentication
   /merchant:
     get:
@@ -76,6 +94,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MerchantResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Merchant
@@ -97,6 +133,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StationResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
@@ -115,6 +169,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LocationDetailResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
@@ -133,6 +205,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StationDetailResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Location
@@ -194,6 +284,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OfferResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Offer
@@ -223,6 +331,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CheckOfferResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Offer
@@ -254,6 +380,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookingResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Booking
@@ -283,6 +427,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Booking
@@ -303,6 +465,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AllBookingResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Booking
@@ -332,6 +512,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancellationResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Cancellation
@@ -358,11 +556,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancellationResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
       security:
       - bearerAuth: []
       x-swagger-router-controller: Cancellation
 components:
   schemas:
+    R400ErrorSchema:
+      required:
+      - error
+      - message
+      - statusCode
+      type: object
+      properties:
+        statusCode:
+          type: number
+        error:
+          type: string
+        message:
+          type: string
+      example:
+        statusCode: 400
+        error: Bad request
+        message: some error occurred with your request.
+    R401ErrorSchema:
+      required:
+      - error
+      - message
+      - statusCode
+      type: object
+      properties:
+        statusCode:
+          type: number
+        error:
+          type: string
+        message:
+          type: string
+      example:
+        statusCode: 401
+        error: Unauthorized
+        message: You are not authorized to server.
+    R500ErrorSchema:
+      required:
+      - error
+      - message
+      - statusCode
+      type: object
+      properties:
+        statusCode:
+          type: number
+        error:
+          type: string
+        message:
+          type: string
+      example:
+        statusCode: 401
+        error: Internal server error
+        message: Internal server error.
     LoginUserResponse:
       required:
       - message
@@ -395,8 +662,8 @@ components:
       example:
         message:
           key:
-          - 0.8008281904610115
-          - 0.8008281904610115
+          - 0.80082819046101150206595775671303272247314453125
+          - 0.80082819046101150206595775671303272247314453125
         status:
           status: true
     LocationDetailResponse:
@@ -414,11 +681,11 @@ components:
           country: country
           seed_key: seed_key
           address: address
-          latitude: 6.027456183070403
+          latitude: 6.02745618307040320615897144307382404804229736328125
           name: name
           location_id: 0
           location_type: location_type
-          longitude: 1.4658129805029452
+          longitude: 1.46581298050294517310021547018550336360931396484375
         status:
           status: true
     StationDetailResponse:
@@ -436,12 +703,12 @@ components:
           country: country
           seed_key: seed_key
           address: address
-          latitude: 1.4658129805029452
+          latitude: 1.46581298050294517310021547018550336360931396484375
           name: name
           parent_location_id: 6
           location_id: 0
           location_type: location_type
-          longitude: 5.962133916683182
+          longitude: 5.962133916683182377482808078639209270477294921875
         status:
           status: true
     OfferResponse:
@@ -458,27 +725,29 @@ components:
             $ref: '#/components/schemas/OfferResponse_message'
       example:
         message:
-        - net_price_per_person: 6.027456183070403
+        - net_price_per_person: 6.02745618307040320615897144307382404804229736328125
           datetime:
             duration: duration
+            arrival: null
             departure:
               date: date
               time: time
-              unix: 5.637376656633329
+              unix: 5.63737665663332876420099637471139430999755859375
           trip:
             from:
               coordinate: coordinate
               station: station
               location: location
               location_key: location_key
-          total_price: 5.962133916683182
-          pax_amount: 1.4658129805029452
+            to: null
+          total_price: 5.962133916683182377482808078639209270477294921875
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
           currency: currency
           service_provider:
             name: name
             logo: logo
             fullname: fullname
-          schedule_id: 0.8008281904610115
+          schedule_id: 0.80082819046101150206595775671303272247314453125
           itineray:
           - date: date
             duration: duration
@@ -490,27 +759,29 @@ components:
             station: station
             time: time
             vehicle: vehicle
-        - net_price_per_person: 6.027456183070403
+        - net_price_per_person: 6.02745618307040320615897144307382404804229736328125
           datetime:
             duration: duration
+            arrival: null
             departure:
               date: date
               time: time
-              unix: 5.637376656633329
+              unix: 5.63737665663332876420099637471139430999755859375
           trip:
             from:
               coordinate: coordinate
               station: station
               location: location
               location_key: location_key
-          total_price: 5.962133916683182
-          pax_amount: 1.4658129805029452
+            to: null
+          total_price: 5.962133916683182377482808078639209270477294921875
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
           currency: currency
           service_provider:
             name: name
             logo: logo
             fullname: fullname
-          schedule_id: 0.8008281904610115
+          schedule_id: 0.80082819046101150206595775671303272247314453125
           itineray:
           - date: date
             duration: duration
@@ -537,12 +808,13 @@ components:
       example:
         message:
           data:
-            net_price: 6.027456183070403
+            arrival_time: null
+            net_price: 6.02745618307040320615897144307382404804229736328125
             currency: currency
-            schedule_id: 0.8008281904610115
+            schedule_id: 0.80082819046101150206595775671303272247314453125
             departure_time:
               date: date
-              unixtime: 1.4658129805029452
+              unixtime: 1.46581298050294517310021547018550336360931396484375
               time: time
             status: status
           status: status
@@ -562,11 +834,11 @@ components:
         message:
           agent_secret: agent_secret
           agent_name: agent_name
-          user_id: 6.027456183070403
-          current_balance: 1.4658129805029452
+          user_id: 6.02745618307040320615897144307382404804229736328125
+          current_balance: 1.46581298050294517310021547018550336360931396484375
           currency: currency
           telephone: telephone
-          merchant_id: 0.8008281904610115
+          merchant_id: 0.80082819046101150206595775671303272247314453125
           email: email
         status:
           status: true
@@ -585,30 +857,32 @@ components:
           ticket_detail:
             notes: notes
             pnr_id: pnr_id
+            arrival: null
             leader_name: leader_name
             leader_contact_email: leader_contact_email
+            dropoff: null
             pickup:
               location: location
               time: time
             travel_date: travel_date
-            travel_date_unix: 7.061401241503109
+            travel_date_unix: 7.061401241503109105224211816675961017608642578125
             leader_contact_telephone: leader_contact_telephone
-            schedule: 5.962133916683182
+            schedule: 5.962133916683182377482808078639209270477294921875
             to_location: to_location
-            pax_amount: 9.301444243932576
-            b2b_rate: 1.4658129805029452
+            pax_amount: 9.301444243932575517419536481611430644989013671875
+            b2b_rate: 1.46581298050294517310021547018550336360931396484375
             from_location: from_location
             departure:
               station: station
               gps:
-                lattitude: 5.637376656633329
-                longitude: 2.3021358869347655
+                lattitude: 5.63737665663332876420099637471139430999755859375
+                longitude: 2.3021358869347654518833223846741020679473876953125
               time: time
             leader_contact_nationality: leader_contact_nationality
             status: status
           transaction_detail:
-            agent_user_id: 0.8008281904610115
-            total_payment_amount: 6.027456183070403
+            agent_user_id: 0.80082819046101150206595775671303272247314453125
+            total_payment_amount: 6.02745618307040320615897144307382404804229736328125
             invoice_code: invoice_code
             agent_secret: agent_secret
             payment_status: true
@@ -629,24 +903,26 @@ components:
         message:
           notes: notes
           pnr_id: pnr_id
+          arrival: null
           leader_name: leader_name
           leader_contact_email: leader_contact_email
+          dropoff: null
           pickup:
             location: location
             time: time
           travel_date: travel_date
-          travel_date_unix: 7.061401241503109
+          travel_date_unix: 7.061401241503109105224211816675961017608642578125
           leader_contact_telephone: leader_contact_telephone
-          schedule: 5.962133916683182
+          schedule: 5.962133916683182377482808078639209270477294921875
           to_location: to_location
-          pax_amount: 9.301444243932576
-          b2b_rate: 1.4658129805029452
+          pax_amount: 9.301444243932575517419536481611430644989013671875
+          b2b_rate: 1.46581298050294517310021547018550336360931396484375
           from_location: from_location
           departure:
             station: station
             gps:
-              lattitude: 5.637376656633329
-              longitude: 2.3021358869347655
+              lattitude: 5.63737665663332876420099637471139430999755859375
+              longitude: 2.3021358869347654518833223846741020679473876953125
             time: time
           leader_contact_nationality: leader_contact_nationality
           status: status
@@ -668,24 +944,24 @@ components:
           - null
           - null
           currentTrip:
-          - schedule: 0.8008281904610115
+          - schedule: 0.80082819046101150206595775671303272247314453125
             pnr_id: pnr_id
             leader_name: leader_name
             leader_contact_email: leader_contact_email
-            pax_amount: 1.4658129805029452
+            pax_amount: 1.46581298050294517310021547018550336360931396484375
             travel_date: travel_date
             leader_contact_nationality: leader_contact_nationality
-            travel_date_unix: 6.027456183070403
+            travel_date_unix: 6.02745618307040320615897144307382404804229736328125
             leader_contact_telephone: leader_contact_telephone
             status: status
-          - schedule: 0.8008281904610115
+          - schedule: 0.80082819046101150206595775671303272247314453125
             pnr_id: pnr_id
             leader_name: leader_name
             leader_contact_email: leader_contact_email
-            pax_amount: 1.4658129805029452
+            pax_amount: 1.46581298050294517310021547018550336360931396484375
             travel_date: travel_date
             leader_contact_nationality: leader_contact_nationality
-            travel_date_unix: 6.027456183070403
+            travel_date_unix: 6.02745618307040320615897144307382404804229736328125
             leader_contact_telephone: leader_contact_telephone
             status: status
           refundTrip:
@@ -708,7 +984,7 @@ components:
           refund_policy: refund_policy
           departure_date: departure_date
           policy_description: policy_description
-          refund_amount: 0.8008281904610115
+          refund_amount: 0.80082819046101150206595775671303272247314453125
         status:
           status: true
     LoginUserRequest:
@@ -921,11 +1197,11 @@ components:
         country: country
         seed_key: seed_key
         address: address
-        latitude: 6.027456183070403
+        latitude: 6.02745618307040320615897144307382404804229736328125
         name: name
         location_id: 0
         location_type: location_type
-        longitude: 1.4658129805029452
+        longitude: 1.46581298050294517310021547018550336360931396484375
     StationDetailResponse_message:
       required:
       - address
@@ -961,12 +1237,12 @@ components:
         country: country
         seed_key: seed_key
         address: address
-        latitude: 1.4658129805029452
+        latitude: 1.46581298050294517310021547018550336360931396484375
         name: name
         parent_location_id: 6
         location_id: 0
         location_type: location_type
-        longitude: 5.962133916683182
+        longitude: 5.962133916683182377482808078639209270477294921875
     OfferResponse_trip_from:
       required:
       - coordinate
@@ -1004,6 +1280,7 @@ components:
           station: station
           location: location
           location_key: location_key
+        to: null
     OfferResponse_service_provider:
       required:
       - fullname
@@ -1037,7 +1314,7 @@ components:
       example:
         date: date
         time: time
-        unix: 5.637376656633329
+        unix: 5.63737665663332876420099637471139430999755859375
     OfferResponse_datetime:
       required:
       - arrival
@@ -1053,10 +1330,11 @@ components:
           type: string
       example:
         duration: duration
+        arrival: null
         departure:
           date: date
           time: time
-          unix: 5.637376656633329
+          unix: 5.63737665663332876420099637471139430999755859375
     OfferResponse_itineray:
       required:
       - date
@@ -1114,27 +1392,29 @@ components:
           items:
             $ref: '#/components/schemas/OfferResponse_itineray'
       example:
-        net_price_per_person: 6.027456183070403
+        net_price_per_person: 6.02745618307040320615897144307382404804229736328125
         datetime:
           duration: duration
+          arrival: null
           departure:
             date: date
             time: time
-            unix: 5.637376656633329
+            unix: 5.63737665663332876420099637471139430999755859375
         trip:
           from:
             coordinate: coordinate
             station: station
             location: location
             location_key: location_key
-        total_price: 5.962133916683182
-        pax_amount: 1.4658129805029452
+          to: null
+        total_price: 5.962133916683182377482808078639209270477294921875
+        pax_amount: 1.46581298050294517310021547018550336360931396484375
         currency: currency
         service_provider:
           name: name
           logo: logo
           fullname: fullname
-        schedule_id: 0.8008281904610115
+        schedule_id: 0.80082819046101150206595775671303272247314453125
         itineray:
         - date: date
           duration: duration
@@ -1161,7 +1441,7 @@ components:
           type: number
       example:
         date: date
-        unixtime: 1.4658129805029452
+        unixtime: 1.46581298050294517310021547018550336360931396484375
         time: time
     CheckOfferResponse_message_data:
       required:
@@ -1186,12 +1466,13 @@ components:
         arrival_time:
           $ref: '#/components/schemas/CheckOfferResponse_message_data_departure_time'
       example:
-        net_price: 6.027456183070403
+        arrival_time: null
+        net_price: 6.02745618307040320615897144307382404804229736328125
         currency: currency
-        schedule_id: 0.8008281904610115
+        schedule_id: 0.80082819046101150206595775671303272247314453125
         departure_time:
           date: date
-          unixtime: 1.4658129805029452
+          unixtime: 1.46581298050294517310021547018550336360931396484375
           time: time
         status: status
     CheckOfferResponse_message:
@@ -1206,12 +1487,13 @@ components:
           $ref: '#/components/schemas/CheckOfferResponse_message_data'
       example:
         data:
-          net_price: 6.027456183070403
+          arrival_time: null
+          net_price: 6.02745618307040320615897144307382404804229736328125
           currency: currency
-          schedule_id: 0.8008281904610115
+          schedule_id: 0.80082819046101150206595775671303272247314453125
           departure_time:
             date: date
-            unixtime: 1.4658129805029452
+            unixtime: 1.46581298050294517310021547018550336360931396484375
             time: time
           status: status
         status: status
@@ -1246,11 +1528,11 @@ components:
       example:
         agent_secret: agent_secret
         agent_name: agent_name
-        user_id: 6.027456183070403
-        current_balance: 1.4658129805029452
+        user_id: 6.02745618307040320615897144307382404804229736328125
+        current_balance: 1.46581298050294517310021547018550336360931396484375
         currency: currency
         telephone: telephone
-        merchant_id: 0.8008281904610115
+        merchant_id: 0.80082819046101150206595775671303272247314453125
         email: email
     BookingResponse_message_transaction_detail:
       required:
@@ -1274,8 +1556,8 @@ components:
         ticket_reference_id:
           type: string
       example:
-        agent_user_id: 0.8008281904610115
-        total_payment_amount: 6.027456183070403
+        agent_user_id: 0.80082819046101150206595775671303272247314453125
+        total_payment_amount: 6.02745618307040320615897144307382404804229736328125
         invoice_code: invoice_code
         agent_secret: agent_secret
         payment_status: true
@@ -1291,8 +1573,8 @@ components:
         longitude:
           type: number
       example:
-        lattitude: 5.637376656633329
-        longitude: 2.3021358869347655
+        lattitude: 5.63737665663332876420099637471139430999755859375
+        longitude: 2.3021358869347654518833223846741020679473876953125
     BookingResponse_message_ticket_detail_departure:
       required:
       - gps
@@ -1309,8 +1591,8 @@ components:
       example:
         station: station
         gps:
-          lattitude: 5.637376656633329
-          longitude: 2.3021358869347655
+          lattitude: 5.63737665663332876420099637471139430999755859375
+          longitude: 2.3021358869347654518833223846741020679473876953125
         time: time
     BookingResponse_message_ticket_detail_pickup:
       required:
@@ -1384,24 +1666,26 @@ components:
       example:
         notes: notes
         pnr_id: pnr_id
+        arrival: null
         leader_name: leader_name
         leader_contact_email: leader_contact_email
+        dropoff: null
         pickup:
           location: location
           time: time
         travel_date: travel_date
-        travel_date_unix: 7.061401241503109
+        travel_date_unix: 7.061401241503109105224211816675961017608642578125
         leader_contact_telephone: leader_contact_telephone
-        schedule: 5.962133916683182
+        schedule: 5.962133916683182377482808078639209270477294921875
         to_location: to_location
-        pax_amount: 9.301444243932576
-        b2b_rate: 1.4658129805029452
+        pax_amount: 9.301444243932575517419536481611430644989013671875
+        b2b_rate: 1.46581298050294517310021547018550336360931396484375
         from_location: from_location
         departure:
           station: station
           gps:
-            lattitude: 5.637376656633329
-            longitude: 2.3021358869347655
+            lattitude: 5.63737665663332876420099637471139430999755859375
+            longitude: 2.3021358869347654518833223846741020679473876953125
           time: time
         leader_contact_nationality: leader_contact_nationality
         status: status
@@ -1419,30 +1703,32 @@ components:
         ticket_detail:
           notes: notes
           pnr_id: pnr_id
+          arrival: null
           leader_name: leader_name
           leader_contact_email: leader_contact_email
+          dropoff: null
           pickup:
             location: location
             time: time
           travel_date: travel_date
-          travel_date_unix: 7.061401241503109
+          travel_date_unix: 7.061401241503109105224211816675961017608642578125
           leader_contact_telephone: leader_contact_telephone
-          schedule: 5.962133916683182
+          schedule: 5.962133916683182377482808078639209270477294921875
           to_location: to_location
-          pax_amount: 9.301444243932576
-          b2b_rate: 1.4658129805029452
+          pax_amount: 9.301444243932575517419536481611430644989013671875
+          b2b_rate: 1.46581298050294517310021547018550336360931396484375
           from_location: from_location
           departure:
             station: station
             gps:
-              lattitude: 5.637376656633329
-              longitude: 2.3021358869347655
+              lattitude: 5.63737665663332876420099637471139430999755859375
+              longitude: 2.3021358869347654518833223846741020679473876953125
             time: time
           leader_contact_nationality: leader_contact_nationality
           status: status
         transaction_detail:
-          agent_user_id: 0.8008281904610115
-          total_payment_amount: 6.027456183070403
+          agent_user_id: 0.80082819046101150206595775671303272247314453125
+          total_payment_amount: 6.02745618307040320615897144307382404804229736328125
           invoice_code: invoice_code
           agent_secret: agent_secret
           payment_status: true
@@ -1482,14 +1768,14 @@ components:
         leader_contact_telephone:
           type: string
       example:
-        schedule: 0.8008281904610115
+        schedule: 0.80082819046101150206595775671303272247314453125
         pnr_id: pnr_id
         leader_name: leader_name
         leader_contact_email: leader_contact_email
-        pax_amount: 1.4658129805029452
+        pax_amount: 1.46581298050294517310021547018550336360931396484375
         travel_date: travel_date
         leader_contact_nationality: leader_contact_nationality
-        travel_date_unix: 6.027456183070403
+        travel_date_unix: 6.02745618307040320615897144307382404804229736328125
         leader_contact_telephone: leader_contact_telephone
         status: status
     AllBookingResponse_message:
@@ -1516,24 +1802,24 @@ components:
         - null
         - null
         currentTrip:
-        - schedule: 0.8008281904610115
+        - schedule: 0.80082819046101150206595775671303272247314453125
           pnr_id: pnr_id
           leader_name: leader_name
           leader_contact_email: leader_contact_email
-          pax_amount: 1.4658129805029452
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
           travel_date: travel_date
           leader_contact_nationality: leader_contact_nationality
-          travel_date_unix: 6.027456183070403
+          travel_date_unix: 6.02745618307040320615897144307382404804229736328125
           leader_contact_telephone: leader_contact_telephone
           status: status
-        - schedule: 0.8008281904610115
+        - schedule: 0.80082819046101150206595775671303272247314453125
           pnr_id: pnr_id
           leader_name: leader_name
           leader_contact_email: leader_contact_email
-          pax_amount: 1.4658129805029452
+          pax_amount: 1.46581298050294517310021547018550336360931396484375
           travel_date: travel_date
           leader_contact_nationality: leader_contact_nationality
-          travel_date_unix: 6.027456183070403
+          travel_date_unix: 6.02745618307040320615897144307382404804229736328125
           leader_contact_telephone: leader_contact_telephone
           status: status
         refundTrip:
@@ -1558,7 +1844,7 @@ components:
         refund_policy: refund_policy
         departure_date: departure_date
         policy_description: policy_description
-        refund_amount: 0.8008281904610115
+        refund_amount: 0.80082819046101150206595775671303272247314453125
     BookingCreateRequest_passengers:
       required:
       - first_name
