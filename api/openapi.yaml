@@ -106,6 +106,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -145,6 +151,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -181,6 +193,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -217,6 +235,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -296,6 +320,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -343,6 +373,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -392,6 +428,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -439,6 +481,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -477,6 +525,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -524,6 +578,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -568,6 +628,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
         "500":
           description: Status 500 Response
           content:
@@ -613,6 +679,23 @@ components:
         statusCode: 401
         error: Unauthorized
         message: You are not authorized to server.
+    R404ErrorSchema:
+      required:
+      - error
+      - message
+      - statusCode
+      type: object
+      properties:
+        statusCode:
+          type: number
+        error:
+          type: string
+        message:
+          type: string
+      example:
+        statusCode: 404
+        error: Not found
+        message: Not found.
     R500ErrorSchema:
       required:
       - error
