@@ -34,9 +34,8 @@ info:
     -> change net_price_per_person to float format <br>- /offer -> change coordinate
     format from string to [lat,long] array format <br>- /merchant -> change text ''agent_secert''
     to ''merchant_secert_id'' <br>- update query date from 2020-06-09 to 2020-09-09
-    <br>- hide `status: true` response to reduce confuse issue <br><br>issue fix v.1.0.6
-    <br>- update accounting logic'
-  version: 1.0.6
+    <br>- hide `status: true` response to reduce confuse issue'
+  version: 1.0.5
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
