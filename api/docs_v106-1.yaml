@@ -38,7 +38,7 @@ info:
     <br>- update accounting logic'
   version: 1.0.6
 servers:
-- url: http://localhost:5000
+- url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
 paths:
   /auth/login:
@@ -1914,6 +1914,6 @@ components:
   securitySchemes:
     bearerAuth:
       type: http
-      description: Enter your bearer token in the format
+      description: Enter your bearer token in the format **Bearer &lt;token>**
       scheme: bearer
       bearerFormat: JWT
