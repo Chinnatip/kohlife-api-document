@@ -35,8 +35,8 @@ info:
     format from string to [lat,long] array format <br>- /merchant -> change text ''agent_secert''
     to ''merchant_secert_id'' <br>- update query date from 2020-06-09 to 2020-09-09
     <br>- hide `status: true` response to reduce confuse issue <br><br>issue fix v.1.0.6
-    <br>- update accounting logic'
-  version: 1.0.6
+    <br>- update accounting logic <br><br>issue fix v.1.0.7 <br>- Add carrier api'
+  version: 1.0.7
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
@@ -128,6 +128,99 @@ paths:
       security:
       - bearerAuth: []
       x-swagger-router-controller: Merchant
+  /carrier:
+    get:
+      tags:
+      - Carrier
+      summary: Show carrier details
+      description: '-'
+      operationId: getCarriers
+      parameters: []
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarrierResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
+      security:
+      - bearerAuth: []
+      x-swagger-router-controller: Carrier
+  /carrie/station/{carrier_id}:
+    get:
+      tags:
+      - Carrier
+      summary: Show station list of carriers
+      description: '-'
+      operationId: getCarrierStation
+      parameters:
+      - name: carrier_id
+        in: path
+        description: '-'
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 440
+      responses:
+        "200":
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarrierStationResponse'
+        "400":
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R400ErrorSchema'
+        "401":
+          description: Status 401 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R401ErrorSchema'
+        "404":
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R404ErrorSchema'
+        "500":
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/R500ErrorSchema'
+      security:
+      - bearerAuth: []
+      x-swagger-router-controller: Carrier
   /destinations:
     get:
       tags:
@@ -730,6 +823,142 @@ components:
       example:
         message:
           access_token: access_token
+    CarrierResponse:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierResponse_message'
+      example:
+        message:
+        - company_type: company_type
+          official_name: official_name
+          main_phone_number: main_phone_number
+          latitude: 6.02745618307040320615897144307382404804229736328125
+          op_name: op_name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          vehicles: 3.61607674925191080461672754609026014804840087890625
+          description: description
+          main_email: main_email
+          book_name: book_name
+          line_id: line_id
+          trip_days: 5.962133916683182377482808078639209270477294921875
+          contact_email: contact_email
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          reserved_hour: 2.3021358869347654518833223846741020679473876953125
+          logo_file_name: logo_file_name
+          id: 0.80082819046101150206595775671303272247314453125
+          logo_content_type: logo_content_type
+          main_fax_number: main_fax_number
+          longitude: 1.46581298050294517310021547018550336360931396484375
+          logo_file_size: 5.63737665663332876420099637471139430999755859375
+          website: website
+          line_bot: true
+          contact_name: contact_name
+          address: address
+          support_phone_number: support_phone_number
+          tat_number: tat_number
+          book_number: book_number
+          due_payment: 7.061401241503109105224211816675961017608642578125
+          stations: 9.301444243932575517419536481611430644989013671875
+          additional_contact_store: additional_contact_store
+          logo_updated_at: 2000-01-23T04:56:07.000+00:00
+          background_image: background_image
+          instant_booking: true
+          image_logo: image_logo
+          support_email: support_email
+          book_bank: book_bank
+          name: name
+          status: status
+        - company_type: company_type
+          official_name: official_name
+          main_phone_number: main_phone_number
+          latitude: 6.02745618307040320615897144307382404804229736328125
+          op_name: op_name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          vehicles: 3.61607674925191080461672754609026014804840087890625
+          description: description
+          main_email: main_email
+          book_name: book_name
+          line_id: line_id
+          trip_days: 5.962133916683182377482808078639209270477294921875
+          contact_email: contact_email
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          reserved_hour: 2.3021358869347654518833223846741020679473876953125
+          logo_file_name: logo_file_name
+          id: 0.80082819046101150206595775671303272247314453125
+          logo_content_type: logo_content_type
+          main_fax_number: main_fax_number
+          longitude: 1.46581298050294517310021547018550336360931396484375
+          logo_file_size: 5.63737665663332876420099637471139430999755859375
+          website: website
+          line_bot: true
+          contact_name: contact_name
+          address: address
+          support_phone_number: support_phone_number
+          tat_number: tat_number
+          book_number: book_number
+          due_payment: 7.061401241503109105224211816675961017608642578125
+          stations: 9.301444243932575517419536481611430644989013671875
+          additional_contact_store: additional_contact_store
+          logo_updated_at: 2000-01-23T04:56:07.000+00:00
+          background_image: background_image
+          instant_booking: true
+          image_logo: image_logo
+          support_email: support_email
+          book_bank: book_bank
+          name: name
+          status: status
+    CarrierStationResponse:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/CarrierStationResponse_message'
+      example:
+        message:
+          destinations:
+          - null
+          - null
+          stations:
+          - country: country
+            images: images
+            address: address
+            company_id: 5.63737665663332876420099637471139430999755859375
+            latitude: latitude
+            map_detail_store: map_detail_store
+            created_at: 2000-01-23T04:56:07.000+00:00
+            parent_location_id: 6.02745618307040320615897144307382404804229736328125
+            description: description
+            type: type
+            url: 5.962133916683182377482808078639209270477294921875
+            seed_key: seed_key
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+            id: 0.80082819046101150206595775671303272247314453125
+            longitude: longitude
+          - country: country
+            images: images
+            address: address
+            company_id: 5.63737665663332876420099637471139430999755859375
+            latitude: latitude
+            map_detail_store: map_detail_store
+            created_at: 2000-01-23T04:56:07.000+00:00
+            parent_location_id: 6.02745618307040320615897144307382404804229736328125
+            description: description
+            type: type
+            url: 5.962133916683182377482808078639209270477294921875
+            seed_key: seed_key
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+            id: 0.80082819046101150206595775671303272247314453125
+            longitude: longitude
     StationResponse:
       required:
       - message
@@ -897,6 +1126,7 @@ components:
       example:
         message:
           merchant_secret_id: merchant_secret_id
+          account_type: account_type
           agent_name: agent_name
           user_id: 6.02745618307040320615897144307382404804229736328125
           current_balance: 1.46581298050294517310021547018550336360931396484375
@@ -904,6 +1134,8 @@ components:
           telephone: telephone
           merchant_id: 0.80082819046101150206595775671303272247314453125
           email: email
+          due_balance: 5.962133916683182377482808078639209270477294921875
+          monthly_maximum_credit: 5.63737665663332876420099637471139430999755859375
     BookingResponse:
       required:
       - message
@@ -1026,9 +1258,10 @@ components:
       example:
         message:
           refund_policy: refund_policy
+          pax_amount: 0.80082819046101150206595775671303272247314453125
           departure_date: departure_date
           policy_description: policy_description
-          refund_amount: 0.80082819046101150206595775671303272247314453125
+          refund_amount: 6.02745618307040320615897144307382404804229736328125
     LoginUserRequest:
       required:
       - email
@@ -1198,6 +1431,303 @@ components:
           type: string
       example:
         access_token: access_token
+    CarrierResponse_message:
+      required:
+      - additional_contact_store
+      - address
+      - background_image
+      - book_bank
+      - book_name
+      - book_number
+      - company_type
+      - contact_email
+      - contact_name
+      - created_at
+      - description
+      - due_payment
+      - id
+      - image_logo
+      - instant_booking
+      - latitude
+      - line_bot
+      - line_id
+      - logo_content_type
+      - logo_file_name
+      - logo_file_size
+      - logo_updated_at
+      - longitude
+      - main_email
+      - main_fax_number
+      - main_phone_number
+      - name
+      - official_name
+      - op_name
+      - reserved_hour
+      - stations
+      - status
+      - support_email
+      - support_phone_number
+      - tat_number
+      - trip_days
+      - updated_at
+      - vehicles
+      - website
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        address:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        main_email:
+          type: string
+        main_phone_number:
+          type: string
+        main_fax_number:
+          type: string
+        additional_contact_store:
+          type: string
+        website:
+          type: string
+        company_type:
+          type: string
+        trip_days:
+          type: number
+        logo_file_name:
+          type: string
+        logo_content_type:
+          type: string
+        logo_file_size:
+          type: number
+        logo_updated_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        op_name:
+          type: string
+        official_name:
+          type: string
+        line_id:
+          type: string
+        instant_booking:
+          type: boolean
+        line_bot:
+          type: boolean
+        image_logo:
+          type: string
+        contact_email:
+          type: string
+        support_email:
+          type: string
+        reserved_hour:
+          type: number
+        created_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        updated_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        status:
+          type: string
+        due_payment:
+          type: number
+        contact_name:
+          type: string
+        book_bank:
+          type: string
+        book_name:
+          type: string
+        book_number:
+          type: string
+        support_phone_number:
+          type: string
+        tat_number:
+          type: string
+        stations:
+          type: number
+        vehicles:
+          type: number
+        description:
+          type: string
+        background_image:
+          type: string
+      example:
+        company_type: company_type
+        official_name: official_name
+        main_phone_number: main_phone_number
+        latitude: 6.02745618307040320615897144307382404804229736328125
+        op_name: op_name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        vehicles: 3.61607674925191080461672754609026014804840087890625
+        description: description
+        main_email: main_email
+        book_name: book_name
+        line_id: line_id
+        trip_days: 5.962133916683182377482808078639209270477294921875
+        contact_email: contact_email
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        reserved_hour: 2.3021358869347654518833223846741020679473876953125
+        logo_file_name: logo_file_name
+        id: 0.80082819046101150206595775671303272247314453125
+        logo_content_type: logo_content_type
+        main_fax_number: main_fax_number
+        longitude: 1.46581298050294517310021547018550336360931396484375
+        logo_file_size: 5.63737665663332876420099637471139430999755859375
+        website: website
+        line_bot: true
+        contact_name: contact_name
+        address: address
+        support_phone_number: support_phone_number
+        tat_number: tat_number
+        book_number: book_number
+        due_payment: 7.061401241503109105224211816675961017608642578125
+        stations: 9.301444243932575517419536481611430644989013671875
+        additional_contact_store: additional_contact_store
+        logo_updated_at: 2000-01-23T04:56:07.000+00:00
+        background_image: background_image
+        instant_booking: true
+        image_logo: image_logo
+        support_email: support_email
+        book_bank: book_bank
+        name: name
+        status: status
+    CarrierStationResponse_message_stations:
+      required:
+      - address
+      - company_id
+      - country
+      - created_at
+      - description
+      - id
+      - images
+      - latitude
+      - longitude
+      - map_detail_store
+      - name
+      - parent_location_id
+      - parent_pickup_id
+      - seed_key
+      - type
+      - updated_at
+      - url
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        type:
+          type: string
+        address:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        created_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        updated_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        parent_location_id:
+          type: number
+        map_detail_store:
+          type: string
+        seed_key:
+          type: string
+        parent_pickup_id:
+          type: number
+        country:
+          type: string
+        url:
+          type: number
+        description:
+          type: string
+        company_id:
+          type: number
+        images:
+          type: string
+      example:
+        country: country
+        images: images
+        address: address
+        company_id: 5.63737665663332876420099637471139430999755859375
+        latitude: latitude
+        map_detail_store: map_detail_store
+        created_at: 2000-01-23T04:56:07.000+00:00
+        parent_location_id: 6.02745618307040320615897144307382404804229736328125
+        description: description
+        type: type
+        url: 5.962133916683182377482808078639209270477294921875
+        seed_key: seed_key
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+        id: 0.80082819046101150206595775671303272247314453125
+        longitude: longitude
+    CarrierStationResponse_message:
+      required:
+      - destinations
+      - stations
+      type: object
+      properties:
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierStationResponse_message_stations'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierStationResponse_message_stations'
+      example:
+        destinations:
+        - null
+        - null
+        stations:
+        - country: country
+          images: images
+          address: address
+          company_id: 5.63737665663332876420099637471139430999755859375
+          latitude: latitude
+          map_detail_store: map_detail_store
+          created_at: 2000-01-23T04:56:07.000+00:00
+          parent_location_id: 6.02745618307040320615897144307382404804229736328125
+          description: description
+          type: type
+          url: 5.962133916683182377482808078639209270477294921875
+          seed_key: seed_key
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+          id: 0.80082819046101150206595775671303272247314453125
+          longitude: longitude
+        - country: country
+          images: images
+          address: address
+          company_id: 5.63737665663332876420099637471139430999755859375
+          latitude: latitude
+          map_detail_store: map_detail_store
+          created_at: 2000-01-23T04:56:07.000+00:00
+          parent_location_id: 6.02745618307040320615897144307382404804229736328125
+          description: description
+          type: type
+          url: 5.962133916683182377482808078639209270477294921875
+          seed_key: seed_key
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+          id: 0.80082819046101150206595775671303272247314453125
+          longitude: longitude
     LocationDetailResponse_message:
       required:
       - address
@@ -1547,9 +2077,9 @@ components:
         status: status
     MerchantResponse_message:
       required:
+      - account_type
       - agent_name
       - currency
-      - current_balance
       - email
       - merchant_id
       - merchant_secret_id
@@ -1559,22 +2089,29 @@ components:
       properties:
         merchant_id:
           type: number
+        account_type:
+          type: string
         user_id:
           type: number
         agent_name:
           type: string
         merchant_secret_id:
           type: string
-        current_balance:
-          type: number
         currency:
           type: string
         email:
           type: string
         telephone:
           type: string
+        current_balance:
+          type: number
+        due_balance:
+          type: number
+        monthly_maximum_credit:
+          type: number
       example:
         merchant_secret_id: merchant_secret_id
+        account_type: account_type
         agent_name: agent_name
         user_id: 6.02745618307040320615897144307382404804229736328125
         current_balance: 1.46581298050294517310021547018550336360931396484375
@@ -1582,6 +2119,8 @@ components:
         telephone: telephone
         merchant_id: 0.80082819046101150206595775671303272247314453125
         email: email
+        due_balance: 5.962133916683182377482808078639209270477294921875
+        monthly_maximum_credit: 5.63737665663332876420099637471139430999755859375
     BookingResponse_message_transaction_detail:
       required:
       - agent_user_id
@@ -1876,12 +2415,15 @@ components:
     CancellationResponse_message:
       required:
       - departure_date
+      - pax_amount
       - policy_description
       - refund_policy
       type: object
       properties:
         departure_date:
           type: string
+        pax_amount:
+          type: number
         refund_policy:
           type: string
         policy_description:
@@ -1890,9 +2432,10 @@ components:
           type: number
       example:
         refund_policy: refund_policy
+        pax_amount: 0.80082819046101150206595775671303272247314453125
         departure_date: departure_date
         policy_description: policy_description
-        refund_amount: 0.80082819046101150206595775671303272247314453125
+        refund_amount: 6.02745618307040320615897144307382404804229736328125
     BookingCreateRequest_passengers:
       required:
       - first_name
