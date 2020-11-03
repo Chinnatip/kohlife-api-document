@@ -35,9 +35,8 @@ info:
     format from string to [lat,long] array format <br>- /merchant -> change text ''agent_secert''
     to ''merchant_secert_id'' <br>- update query date from 2020-06-09 to 2020-09-09
     <br>- hide `status: true` response to reduce confuse issue <br><br>issue fix v.1.0.6
-    <br>- update accounting logic <br><br>issue fix v.1.0.7 <br>- Add carrier api
-    <br><br>issue fix v.1.0.8 <br>- Fix carrier - carrier_station detail'
-  version: 1.0.8
+    <br>- update accounting logic <br><br>issue fix v.1.0.7 <br>- Add carrier api'
+  version: 1.0.7
 servers:
 - url: https://6jmrasat4k.execute-api.ap-southeast-1.amazonaws.com/dev
   description: Sandbox server (uses test data)
@@ -835,20 +834,84 @@ components:
             $ref: '#/components/schemas/CarrierResponse_message'
       example:
         message:
-        - carrier_id: 0.80082819046101150206595775671303272247314453125
-          background_image: background_image
-          company_type: company_type
+        - company_type: company_type
           official_name: official_name
+          main_phone_number: main_phone_number
+          latitude: 6.02745618307040320615897144307382404804229736328125
+          op_name: op_name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          vehicles: 3.61607674925191080461672754609026014804840087890625
+          description: description
+          main_email: main_email
+          book_name: book_name
+          line_id: line_id
+          trip_days: 5.962133916683182377482808078639209270477294921875
+          contact_email: contact_email
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          reserved_hour: 2.3021358869347654518833223846741020679473876953125
+          logo_file_name: logo_file_name
+          id: 0.80082819046101150206595775671303272247314453125
+          logo_content_type: logo_content_type
+          main_fax_number: main_fax_number
+          longitude: 1.46581298050294517310021547018550336360931396484375
+          logo_file_size: 5.63737665663332876420099637471139430999755859375
+          website: website
+          line_bot: true
+          contact_name: contact_name
           address: address
-          carrier_key: carrier_key
-          carrier_name: carrier_name
-        - carrier_id: 0.80082819046101150206595775671303272247314453125
+          support_phone_number: support_phone_number
+          tat_number: tat_number
+          book_number: book_number
+          due_payment: 7.061401241503109105224211816675961017608642578125
+          stations: 9.301444243932575517419536481611430644989013671875
+          additional_contact_store: additional_contact_store
+          logo_updated_at: 2000-01-23T04:56:07.000+00:00
           background_image: background_image
-          company_type: company_type
+          instant_booking: true
+          image_logo: image_logo
+          support_email: support_email
+          book_bank: book_bank
+          name: name
+          status: status
+        - company_type: company_type
           official_name: official_name
+          main_phone_number: main_phone_number
+          latitude: 6.02745618307040320615897144307382404804229736328125
+          op_name: op_name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          vehicles: 3.61607674925191080461672754609026014804840087890625
+          description: description
+          main_email: main_email
+          book_name: book_name
+          line_id: line_id
+          trip_days: 5.962133916683182377482808078639209270477294921875
+          contact_email: contact_email
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          reserved_hour: 2.3021358869347654518833223846741020679473876953125
+          logo_file_name: logo_file_name
+          id: 0.80082819046101150206595775671303272247314453125
+          logo_content_type: logo_content_type
+          main_fax_number: main_fax_number
+          longitude: 1.46581298050294517310021547018550336360931396484375
+          logo_file_size: 5.63737665663332876420099637471139430999755859375
+          website: website
+          line_bot: true
+          contact_name: contact_name
           address: address
-          carrier_key: carrier_key
-          carrier_name: carrier_name
+          support_phone_number: support_phone_number
+          tat_number: tat_number
+          book_number: book_number
+          due_payment: 7.061401241503109105224211816675961017608642578125
+          stations: 9.301444243932575517419536481611430644989013671875
+          additional_contact_store: additional_contact_store
+          logo_updated_at: 2000-01-23T04:56:07.000+00:00
+          background_image: background_image
+          instant_booking: true
+          image_logo: image_logo
+          support_email: support_email
+          book_bank: book_bank
+          name: name
+          status: status
     CarrierStationResponse:
       required:
       - message
@@ -859,42 +922,42 @@ components:
       example:
         message:
           destinations:
-          - country: country
-            images: images
-            address: address
-            destination_id: 6.02745618307040320615897144307382404804229736328125
-            latitude: latitude
-            name: name
-            destination_key: destination_key
-            type: type
-            longitude: longitude
-          - country: country
-            images: images
-            address: address
-            destination_id: 6.02745618307040320615897144307382404804229736328125
-            latitude: latitude
-            name: name
-            destination_key: destination_key
-            type: type
-            longitude: longitude
+          - null
+          - null
           stations:
           - country: country
             images: images
             address: address
-            station_id: 0.80082819046101150206595775671303272247314453125
+            company_id: 5.63737665663332876420099637471139430999755859375
             latitude: latitude
-            name: name
-            station_key: station_key
+            map_detail_store: map_detail_store
+            created_at: 2000-01-23T04:56:07.000+00:00
+            parent_location_id: 6.02745618307040320615897144307382404804229736328125
+            description: description
             type: type
+            url: 5.962133916683182377482808078639209270477294921875
+            seed_key: seed_key
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+            id: 0.80082819046101150206595775671303272247314453125
             longitude: longitude
           - country: country
             images: images
             address: address
-            station_id: 0.80082819046101150206595775671303272247314453125
+            company_id: 5.63737665663332876420099637471139430999755859375
             latitude: latitude
-            name: name
-            station_key: station_key
+            map_detail_store: map_detail_store
+            created_at: 2000-01-23T04:56:07.000+00:00
+            parent_location_id: 6.02745618307040320615897144307382404804229736328125
+            description: description
             type: type
+            url: 5.962133916683182377482808078639209270477294921875
+            seed_key: seed_key
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+            id: 0.80082819046101150206595775671303272247314453125
             longitude: longitude
     StationResponse:
       required:
@@ -1370,55 +1433,197 @@ components:
         access_token: access_token
     CarrierResponse_message:
       required:
+      - additional_contact_store
       - address
       - background_image
-      - carrier_id
-      - carrier_key
-      - carrier_name
+      - book_bank
+      - book_name
+      - book_number
       - company_type
+      - contact_email
+      - contact_name
+      - created_at
+      - description
+      - due_payment
+      - id
+      - image_logo
+      - instant_booking
+      - latitude
+      - line_bot
+      - line_id
+      - logo_content_type
+      - logo_file_name
+      - logo_file_size
+      - logo_updated_at
+      - longitude
+      - main_email
+      - main_fax_number
+      - main_phone_number
+      - name
       - official_name
+      - op_name
+      - reserved_hour
+      - stations
+      - status
+      - support_email
+      - support_phone_number
+      - tat_number
+      - trip_days
+      - updated_at
+      - vehicles
+      - website
       type: object
       properties:
-        carrier_id:
+        id:
           type: number
-        carrier_key:
+        name:
           type: string
         address:
           type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        main_email:
+          type: string
+        main_phone_number:
+          type: string
+        main_fax_number:
+          type: string
+        additional_contact_store:
+          type: string
+        website:
+          type: string
         company_type:
           type: string
-        carrier_name:
+        trip_days:
+          type: number
+        logo_file_name:
+          type: string
+        logo_content_type:
+          type: string
+        logo_file_size:
+          type: number
+        logo_updated_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        op_name:
           type: string
         official_name:
+          type: string
+        line_id:
+          type: string
+        instant_booking:
+          type: boolean
+        line_bot:
+          type: boolean
+        image_logo:
+          type: string
+        contact_email:
+          type: string
+        support_email:
+          type: string
+        reserved_hour:
+          type: number
+        created_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        updated_at:
+          type: string
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        status:
+          type: string
+        due_payment:
+          type: number
+        contact_name:
+          type: string
+        book_bank:
+          type: string
+        book_name:
+          type: string
+        book_number:
+          type: string
+        support_phone_number:
+          type: string
+        tat_number:
+          type: string
+        stations:
+          type: number
+        vehicles:
+          type: number
+        description:
           type: string
         background_image:
           type: string
       example:
-        carrier_id: 0.80082819046101150206595775671303272247314453125
-        background_image: background_image
         company_type: company_type
         official_name: official_name
+        main_phone_number: main_phone_number
+        latitude: 6.02745618307040320615897144307382404804229736328125
+        op_name: op_name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        vehicles: 3.61607674925191080461672754609026014804840087890625
+        description: description
+        main_email: main_email
+        book_name: book_name
+        line_id: line_id
+        trip_days: 5.962133916683182377482808078639209270477294921875
+        contact_email: contact_email
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        reserved_hour: 2.3021358869347654518833223846741020679473876953125
+        logo_file_name: logo_file_name
+        id: 0.80082819046101150206595775671303272247314453125
+        logo_content_type: logo_content_type
+        main_fax_number: main_fax_number
+        longitude: 1.46581298050294517310021547018550336360931396484375
+        logo_file_size: 5.63737665663332876420099637471139430999755859375
+        website: website
+        line_bot: true
+        contact_name: contact_name
         address: address
-        carrier_key: carrier_key
-        carrier_name: carrier_name
+        support_phone_number: support_phone_number
+        tat_number: tat_number
+        book_number: book_number
+        due_payment: 7.061401241503109105224211816675961017608642578125
+        stations: 9.301444243932575517419536481611430644989013671875
+        additional_contact_store: additional_contact_store
+        logo_updated_at: 2000-01-23T04:56:07.000+00:00
+        background_image: background_image
+        instant_booking: true
+        image_logo: image_logo
+        support_email: support_email
+        book_bank: book_bank
+        name: name
+        status: status
     CarrierStationResponse_message_stations:
       required:
       - address
+      - company_id
       - country
+      - created_at
+      - description
+      - id
       - images
       - latitude
       - longitude
+      - map_detail_store
       - name
-      - station_id
-      - station_key
+      - parent_location_id
+      - parent_pickup_id
+      - seed_key
       - type
+      - updated_at
+      - url
       type: object
       properties:
-        station_id:
+        id:
           type: number
-        type:
-          type: string
         name:
+          type: string
+        type:
           type: string
         address:
           type: string
@@ -1426,62 +1631,49 @@ components:
           type: string
         longitude:
           type: string
-        station_key:
+        created_at:
           type: string
-        country:
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        updated_at:
           type: string
-        images:
-          type: string
-      example:
-        country: country
-        images: images
-        address: address
-        station_id: 0.80082819046101150206595775671303272247314453125
-        latitude: latitude
-        name: name
-        station_key: station_key
-        type: type
-        longitude: longitude
-    CarrierStationResponse_message_destinations:
-      required:
-      - address
-      - country
-      - destination_id
-      - destination_key
-      - images
-      - latitude
-      - longitude
-      - name
-      - type
-      type: object
-      properties:
-        destination_id:
+          description: Enables basic storage and retrieval of dates and times.
+          format: date-time
+        parent_location_id:
           type: number
-        type:
+        map_detail_store:
           type: string
-        name:
+        seed_key:
           type: string
-        address:
-          type: string
-        latitude:
-          type: string
-        longitude:
-          type: string
-        destination_key:
-          type: string
+        parent_pickup_id:
+          type: number
         country:
           type: string
+        url:
+          type: number
+        description:
+          type: string
+        company_id:
+          type: number
         images:
           type: string
       example:
         country: country
         images: images
         address: address
-        destination_id: 6.02745618307040320615897144307382404804229736328125
+        company_id: 5.63737665663332876420099637471139430999755859375
         latitude: latitude
-        name: name
-        destination_key: destination_key
+        map_detail_store: map_detail_store
+        created_at: 2000-01-23T04:56:07.000+00:00
+        parent_location_id: 6.02745618307040320615897144307382404804229736328125
+        description: description
         type: type
+        url: 5.962133916683182377482808078639209270477294921875
+        seed_key: seed_key
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+        id: 0.80082819046101150206595775671303272247314453125
         longitude: longitude
     CarrierStationResponse_message:
       required:
@@ -1496,45 +1688,45 @@ components:
         destinations:
           type: array
           items:
-            $ref: '#/components/schemas/CarrierStationResponse_message_destinations'
+            $ref: '#/components/schemas/CarrierStationResponse_message_stations'
       example:
         destinations:
-        - country: country
-          images: images
-          address: address
-          destination_id: 6.02745618307040320615897144307382404804229736328125
-          latitude: latitude
-          name: name
-          destination_key: destination_key
-          type: type
-          longitude: longitude
-        - country: country
-          images: images
-          address: address
-          destination_id: 6.02745618307040320615897144307382404804229736328125
-          latitude: latitude
-          name: name
-          destination_key: destination_key
-          type: type
-          longitude: longitude
+        - null
+        - null
         stations:
         - country: country
           images: images
           address: address
-          station_id: 0.80082819046101150206595775671303272247314453125
+          company_id: 5.63737665663332876420099637471139430999755859375
           latitude: latitude
-          name: name
-          station_key: station_key
+          map_detail_store: map_detail_store
+          created_at: 2000-01-23T04:56:07.000+00:00
+          parent_location_id: 6.02745618307040320615897144307382404804229736328125
+          description: description
           type: type
+          url: 5.962133916683182377482808078639209270477294921875
+          seed_key: seed_key
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+          id: 0.80082819046101150206595775671303272247314453125
           longitude: longitude
         - country: country
           images: images
           address: address
-          station_id: 0.80082819046101150206595775671303272247314453125
+          company_id: 5.63737665663332876420099637471139430999755859375
           latitude: latitude
-          name: name
-          station_key: station_key
+          map_detail_store: map_detail_store
+          created_at: 2000-01-23T04:56:07.000+00:00
+          parent_location_id: 6.02745618307040320615897144307382404804229736328125
+          description: description
           type: type
+          url: 5.962133916683182377482808078639209270477294921875
+          seed_key: seed_key
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          parent_pickup_id: 1.46581298050294517310021547018550336360931396484375
+          id: 0.80082819046101150206595775671303272247314453125
           longitude: longitude
     LocationDetailResponse_message:
       required:
